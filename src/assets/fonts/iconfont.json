@@ -1,0 +1,44 @@
+{
+  "id": "2471904",
+  "name": "wangli",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3695886",
+      "name": "首页",
+      "font_class": "shouye-yuanshijituantubiao",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "7777804",
+      "name": "手动同步",
+      "font_class": "shoudongtongbu",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "12719947",
+      "name": "流程",
+      "font_class": "liucheng",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "15644310",
+      "name": "报警",
+      "font_class": "baojing",
+      "unicode": "e6ba",
+      "unicode_decimal": 59066
+    },
+    {
+      "icon_id": "17204044",
+      "name": "设置",
+      "font_class": "xianxingtubiaozhizuomoban-19",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    }
+  ]
+}

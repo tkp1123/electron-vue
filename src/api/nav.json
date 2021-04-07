@@ -1,0 +1,99 @@
+{
+    "menuList": [
+        {
+            "id": "1",
+            "autoName": "首页",
+            "path": "welcome",
+            "icon": "iconfont icon-shouye-yuanshijituantubiao"
+        },
+        {
+            "id": "2",
+            "autoName": "手动页面",
+            "path": "manual",
+            "icon": "iconfont icon-shoudongtongbu"
+        },
+        {
+            "id": "3",
+            "autoName": "IO监控",
+            "path": "ioStream",
+            "icon": "iconfont icon-liucheng",
+            "children": [
+                {
+                    "id": "3-1",
+                    "autoName": "PLC1输出",
+                    "path": "plc1OutPut",
+                    "children": []
+                },
+                {
+                    "id": "3-2",
+                    "autoName": "PLC2输出",
+                    "path": "plc2OutPut",
+                    "children": []
+                },
+                {
+                    "id": "3-3",
+                    "autoName": "PLC输入1",
+                    "path": "PLCInPut1",
+                    "children": []
+                },
+                {
+                    "id": "3-4",
+                    "autoName": "PLC输入2",
+                    "path": "PLCInPut2",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "autoName": "设置页面",
+            "path": "setting",
+            "icon": "iconfont icon-xianxingtubiaozhizuomoban-19",
+            "children": [
+                {
+                    "id": "4-1",
+                    "autoName": "基本参数",
+                    "path": "basic",
+                    "children": []
+                },
+                {
+                    "id": "4-2",
+                    "autoName": "速度",
+                    "path": "speed",
+                    "children": []
+                },
+                {
+                    "id": "4-3",
+                    "autoName": "电机参数",
+                    "path": "electricMotor",
+                    "children": []
+                },
+                {
+                    "id": "4-44",
+                    "autoName": "厂家参数",
+                    "path": "manufactor",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "autoName": "报警页面",
+            "path": "warnning",
+            "icon": "iconfont icon-baojing"
+        }
+    ],
+    "plc1output": [
+        {},
+        {}
+    ],
+    "plc2output": [],
+    "PLCInPut1": [],
+    "PLCInPut2": [],
+    "manual": [],
+    "basic": [],
+    "electricmotor": [],
+    "manufactor": [],
+    "speed": [],
+    "warnning": []
+}
