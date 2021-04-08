@@ -8,11 +8,11 @@
   </div>
 </template>
 <script>
-import Nav from "@/components/common/nav";
-import Header from "@/components/common/header";
-import Main from "@/components/common/main";
+import Nav from '@/components/common/nav'
+import Header from '@/components/common/header'
+import Main from '@/components/common/main'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Nav,
     Main,
@@ -20,20 +20,20 @@ export default {
   },
   computed: {
     nav() {
-      return this.$store.state.collapse;
+      return this.$store.state.collapse
     },
     classObj() {
       return {
         hideSidebar: this.nav.isCollapse,
         openSidebar: !this.nav.isCollapse,
-      };
+      }
     },
   },
   //store,
   data() {
-    return {};
+    return {}
   },
-};
+}
 </script>
 <style lang="less" scoped>
 .home-container {

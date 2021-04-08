@@ -24,6 +24,36 @@ const router = new Router({
           name: 'welcome',
           component: resolve => require(['@/components/views/welcome/welcome'], resolve)
         },
+        //任务列表
+        // {
+        //   path: '/taskList',
+        //   name: 'taskList',
+        //   component: resolve => require(['@/components/views/task/taskList'], resolve)
+        // },
+        //任务和工艺信息
+        {
+          path: '/taskInformation',
+          name: 'taskInformation',
+          component: resolve => require(['@/components/views/task/taskInformation'], resolve),
+        },
+        //任务和工艺信息详情
+        {
+          path: '/taskInformationDetail',
+          name: 'taskInformationDetail',
+          component: resolve => require(['@/components/views/task/taskInformationDetail'], resolve)
+        },
+        //工艺请求
+        {
+          path: '/technology',
+          name: 'technology',
+          component: resolve => require(['@/components/views/task/technology'], resolve)
+        },
+        //工艺请求详情
+        {
+          path: '/technologyDetail',
+          name: 'technologyDetail',
+          component: resolve => require(['@/components/views/task/technologyDetail'], resolve)
+        },
         //手动页面
         {
           path: '/manual',

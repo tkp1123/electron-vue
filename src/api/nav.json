@@ -8,36 +8,56 @@
         },
         {
             "id": "2",
+            "autoName": "任务列表",
+            "path": "taskList",
+            "icon": "iconfont icon-renwu",
+            "children": [
+                {
+                    "id": "2-1",
+                    "autoName": "任务和工艺信息",
+                    "path": "taskInformation",
+                    "children": []
+                },
+                {
+                    "id": "2-2",
+                    "autoName": "工艺请求",
+                    "path": "technology",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "3",
             "autoName": "手动页面",
             "path": "manual",
             "icon": "iconfont icon-shoudongtongbu"
         },
         {
-            "id": "3",
+            "id": "4",
             "autoName": "IO监控",
             "path": "ioStream",
             "icon": "iconfont icon-liucheng",
             "children": [
                 {
-                    "id": "3-1",
+                    "id": "4-1",
                     "autoName": "PLC1输出",
                     "path": "plc1OutPut",
                     "children": []
                 },
                 {
-                    "id": "3-2",
+                    "id": "4-2",
                     "autoName": "PLC2输出",
                     "path": "plc2OutPut",
                     "children": []
                 },
                 {
-                    "id": "3-3",
+                    "id": "4-3",
                     "autoName": "PLC输入1",
                     "path": "PLCInPut1",
                     "children": []
                 },
                 {
-                    "id": "3-4",
+                    "id": "4-4",
                     "autoName": "PLC输入2",
                     "path": "PLCInPut2",
                     "children": []
@@ -45,31 +65,31 @@
             ]
         },
         {
-            "id": "4",
+            "id": "5",
             "autoName": "设置页面",
             "path": "setting",
             "icon": "iconfont icon-xianxingtubiaozhizuomoban-19",
             "children": [
                 {
-                    "id": "4-1",
+                    "id": "5-1",
                     "autoName": "基本参数",
                     "path": "basic",
                     "children": []
                 },
                 {
-                    "id": "4-2",
+                    "id": "5-2",
                     "autoName": "速度",
                     "path": "speed",
                     "children": []
                 },
                 {
-                    "id": "4-3",
+                    "id": "5-3",
                     "autoName": "电机参数",
                     "path": "electricMotor",
                     "children": []
                 },
                 {
-                    "id": "4-44",
+                    "id": "5-4",
                     "autoName": "厂家参数",
                     "path": "manufactor",
                     "children": []
@@ -77,7 +97,7 @@
             ]
         },
         {
-            "id": "5",
+            "id": "6",
             "autoName": "报警页面",
             "path": "warnning",
             "icon": "iconfont icon-baojing"

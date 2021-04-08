@@ -1,14 +1,14 @@
 <template>
-  <div>11111111111111111111</div>
+  <div></div>
 </template>
 <script>
 export default {
   //首页
-  name: "welcome",
+  name: 'welcome',
   data() {
-    return {};
+    return {}
   },
-};
+}
 </script>
 <style  lang="less" scoped>
 </style>

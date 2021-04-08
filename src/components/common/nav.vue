@@ -2,8 +2,8 @@
   <!-- 侧边  -->
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="nav_title">
-      <img class="img" src="@/assets/logo.png" v-if="getCollapse" />
-      <span v-else>管理系统</span>
+      <img class="img" src="@/assets/logo.png" />
+      <!-- <span v-if="!getCollapse">管理系统</span> -->
     </div>
     <el-menu
       background-color="#eceff4"
@@ -39,25 +39,25 @@
   </el-scrollbar>
 </template>
 <script>
-import jsonNav from "@/api/nav.json";
+import jsonNav from '@/api/nav.json'
 export default {
   computed: {
     getCollapse() {
-      return this.$store.state.collapse.isCollapse;
+      return this.$store.state.collapse.isCollapse
     },
   },
   data() {
     return {
-      menuList: "",
-    };
+      menuList: '',
+    }
   },
   created() {
-    this.menuList = jsonNav.menuList;
+    this.menuList = jsonNav.menuList
   },
   mounted() {
     //console.log(JSON.parse(this.$store.state.user.navList));
   },
-};
+}
 </script>
 <style lang="less" scoped>
 .img {
