@@ -1,20 +1,26 @@
 <template>
   <div>
     <el-card class="box-card" shadow="never">
-      <el-row :gutter="30">
-        <el-col :span="7">
+      <el-row :gutter="20" style="padding: 10px">
+        <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-input
-              v-model="queryInfo"
-              clearable
-              placeholder="请输入请求编号"
-            >
-            </el-input>
+            <el-col :span="20">
+              <el-row>
+                <el-col :span="7">
+                  <el-input
+                    v-model="queryInfo"
+                    clearable
+                    placeholder="请输入请求编号"
+                  >
+                  </el-input>
+                </el-col>
+              </el-row>
+            </el-col>
+            <el-col :span="4" class="text-right">
+              <el-button type="primary" @click="search()">查询</el-button>
+            </el-col>
           </el-row>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="search()">查询</el-button>
-        </el-col>
+        </el-card>
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
@@ -126,5 +132,8 @@ export default {
 }
 .el-pagination {
   padding-top: 20px;
+}
+.text-right {
+  text-align: right;
 }
 </style>

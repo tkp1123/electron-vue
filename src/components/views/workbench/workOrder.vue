@@ -6,13 +6,21 @@
           <el-row>
             <el-col :span="20">
               <el-row>
-                <el-col :span="7">
-                  <el-input
-                    v-model="queryInfo"
-                    clearable
-                    placeholder="请输入请求编号"
+                <el-col :span="4">
+                  <el-button
+                    icon="el-icon-plus"
+                    type="primary"
+                    @click="addWorkOrder()"
+                    >添加工单</el-button
                   >
-                  </el-input>
+                </el-col>
+                <el-col :span="7">
+                  <el-date-picker
+                    v-model="value1"
+                    type="date"
+                    placeholder="选择日期"
+                  >
+                  </el-date-picker>
                 </el-col>
               </el-row>
             </el-col>
@@ -24,26 +32,29 @@
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
-          <el-table-column prop="EventCode" label="事件码"></el-table-column>
           <el-table-column
             prop="RequestCode"
-            label="请求编号"
+            label="任务序号"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="产线编号"></el-table-column>
+          <el-table-column prop="LineCode" label="品类类型"></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="工序编号"
+            label="待加工数量"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="工序短名称"
+            label="总数量"
           ></el-table-column>
-          <el-table-column label="工艺信息">
+          <el-table-column prop="EventCode" label="起始时间"></el-table-column>
+          <el-table-column prop="EventCode" label="完成时间"></el-table-column>
+          <el-table-column prop="EventCode" label="状态"></el-table-column>
+          <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button
                 size="mini"
+                type="primary"
                 @click="handleDetail(scope.$index, scope.row)"
-                >详情</el-button
+                >加工</el-button
               >
             </template>
           </el-table-column>
@@ -65,11 +76,11 @@
 </template>
 <script>
 export default {
-  //工艺请求
-  name: 'technology',
+  //自建工单
+  name: 'workOrder',
   data() {
     return {
-      queryInfo: '',
+      value1: '',
       tableData: [
         {
           RequestCode: 'xxx1',
@@ -120,7 +131,26 @@ export default {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
     handleDetail(index, row) {
-      this.$router.push('/technologyDetail')
+      this.$confirm('是否加工?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '成功!',
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消',
+          })
+        })
+    },
+    addWorkOrder() {
+      this.$router.push('/addWorkOrder')
     },
   },
 }

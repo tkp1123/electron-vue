@@ -2,11 +2,11 @@
 <script>
 export default {
   //手动页面
-  name: "manual",
+  name: 'manual',
   data() {
-    return {};
+    return {}
   },
-};
+}
 </script>
 <style  lang="less" scoped>
 </style>

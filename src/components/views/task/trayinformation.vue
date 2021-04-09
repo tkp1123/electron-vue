@@ -1,79 +1,58 @@
 <template>
   <div>
     <el-card class="box-card" shadow="never">
-      <el-row :gutter="30">
-        <el-col :span="7">
-          <el-row>
-            <el-input
-              v-model="queryInfo"
-              clearable
-              placeholder="请输入请求编号"
-            >
-            </el-input>
+      <el-row :gutter="20" style="padding: 10px">
+        <el-card shadow="never" style="padding: 10px">
+          <el-row :gutter="20">
+            <el-col :span="16">
+              <el-row :gutter="10">
+                <el-col :span="7">
+                  <el-input
+                    v-model="queryInfo"
+                    clearable
+                    placeholder="请输入托盘编号"
+                  >
+                  </el-input>
+                </el-col>
+              </el-row>
+            </el-col>
+            <el-col :span="4" class="text-right">
+              <el-button type="primary" @click="search()">查询</el-button>
+            </el-col>
+            <el-col :span="4">
+              <el-button type="primary" @click="checkHistory()"
+                >查看历史纪录</el-button
+              >
+            </el-col>
           </el-row>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="search()">查询</el-button>
-        </el-col>
+        </el-card>
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
-            prop="EventCode"
-            label="1mm脉冲数 X轴"
-          ></el-table-column>
-          <el-table-column
             prop="RequestCode"
-            label="1mm脉冲数 Y轴"
+            label="请求编号"
           ></el-table-column>
-          <el-table-column
-            prop="LineCode"
-            label="加减速时间（ms）X轴"
-          ></el-table-column>
+          <el-table-column prop="LineCode" label="产线编号"></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="加减速时间（ms）Y轴"
+            label="工序编号"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="最大转速（R/MIN) X轴"
+            label="工序短名称"
           ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="最大转速（R/MIN) Y轴"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="动力辊台1 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="动力辊台2 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="翻板辊台 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="翻板机 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="皮带机1 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="皮带机2 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="皮带机3 频率/速度"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="皮带机4 频率/速度"
-          ></el-table-column>
+          <el-table-column prop="EventCode" label="事件码"></el-table-column>
+          <el-table-column prop="EventCode" label="托盘号"></el-table-column>
+          <el-table-column label="部件集合">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleDetail(scope.$index, scope.row)"
+                >详情</el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
         <el-row>
           <el-pagination
@@ -92,8 +71,8 @@
 </template>
 <script>
 export default {
-  //电机参数
-  name: 'electricMotor',
+  //任务和工艺信息
+  name: 'taskInformation',
   data() {
     return {
       queryInfo: '',
@@ -146,6 +125,12 @@ export default {
   methods: {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
+    handleDetail(index, row) {
+      this.$router.push('/trayinformationDetail')
+    },
+    checkHistory() {
+      this.$router.push('/trayinformationHistory')
+    },
   },
 }
 </script>
@@ -156,5 +141,8 @@ export default {
 }
 .el-pagination {
   padding-top: 20px;
+}
+.text-right {
+  text-align: right;
 }
 </style>

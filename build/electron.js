@@ -6,9 +6,10 @@ const path = require('path')
 const url = require('url')
 
 let mainWindow
-
+const menu = electron.Menu
 function createWindow() {
-  mainWindow = new BrowserWindow({ show: false })
+  menu.setApplicationMenu(null)
+  mainWindow = new BrowserWindow({})
   mainWindow.maximize()
   mainWindow.show()
 

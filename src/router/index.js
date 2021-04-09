@@ -54,6 +54,48 @@ const router = new Router({
           name: 'technologyDetail',
           component: resolve => require(['@/components/views/task/technologyDetail'], resolve)
         },
+        //托盘上线
+        {
+          path: '/trayinformation',
+          name: 'trayinformation',
+          component: resolve => require(['@/components/views/task/trayinformation'], resolve)
+        },
+        //托盘上线详情
+        {
+          path: '/trayinformationDetail',
+          name: 'trayinformationDetail',
+          component: resolve => require(['@/components/views/task/trayinformationDetail'], resolve)
+        },
+        //托盘上线历史页面
+        {
+          path: '/trayinformationHistory',
+          name: 'trayinformationHistory',
+          component: resolve => require(['@/components/views/task/trayTemplate/trayinformationHistory'], resolve)
+        },
+        //工作台
+        // {
+        //   path: '/workbench',
+        //   name: 'workbench',
+        //   component: resolve => require(['@/components/views/workbench/workbench'], resolve)
+        // },
+        //MES任务
+        {
+          path: '/taskMES',
+          name: 'taskMES',
+          component: resolve => require(['@/components/views/workbench/taskMES'], resolve)
+        },
+        //自建工单
+        {
+          path: '/workOrder',
+          name: 'workOrder',
+          component: resolve => require(['@/components/views/workbench/workOrder'], resolve)
+        },
+        //添加工单
+        {
+          path: '/addWorkOrder',
+          name: 'addWorkOrder',
+          component: resolve => require(['@/components/views/workbench/addWorkOrder'], resolve)
+        },
         //手动页面
         {
           path: '/manual',
