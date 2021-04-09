@@ -4,7 +4,7 @@
       <el-row :gutter="20" style="padding: 10px">
         <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-col :span="20">
+            <el-col :span="20" :xs="24">
               <el-row>
                 <el-col :span="7">
                   <el-input
@@ -16,7 +16,7 @@
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :span="4" class="text-right">
+            <el-col :span="4" :xs="24" class="text-right">
               <el-button type="primary" @click="search()">查询</el-button>
             </el-col>
           </el-row>

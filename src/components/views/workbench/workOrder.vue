@@ -4,9 +4,9 @@
       <el-row :gutter="20" style="padding: 10px">
         <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-col :span="20">
+            <el-col :span="20" :xs="24" :sm="20" :md="20">
               <el-row>
-                <el-col :span="4">
+                <el-col :span="4" :xs="24" :sm="24" :md="24" :lg="4">
                   <el-button
                     icon="el-icon-plus"
                     type="primary"
@@ -14,7 +14,7 @@
                     >添加工单</el-button
                   >
                 </el-col>
-                <el-col :span="7">
+                <el-col :span="7" :xs="24" :sm="24" :md="27" :lg="7">
                   <el-date-picker
                     v-model="value1"
                     type="date"
@@ -24,7 +24,7 @@
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :span="4" class="text-right">
+            <el-col :span="4" :xs="24" :sm="4" :md="4" class="text-right">
               <el-button type="primary" @click="search()">查询</el-button>
             </el-col>
           </el-row>

@@ -1,123 +1,35 @@
 <template>
   <div>
     <el-card class="box-card" shadow="never">
-      <el-row :gutter="30">
-        <el-col :span="7">
+      <el-row :gutter="20" style="padding: 10px">
+        <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-input
-              v-model="queryInfo"
-              clearable
-              placeholder="请输入请求编号"
-            >
-            </el-input>
+            <el-col :span="20" :xs="24">
+              <el-row>
+                <el-col :span="7">
+                  <el-date-picker
+                    v-model="value1"
+                    type="date"
+                    placeholder="选择日期"
+                  >
+                  </el-date-picker>
+                </el-col>
+              </el-row>
+            </el-col>
+            <el-col :span="4" :xs="24" class="text-right">
+              <el-button type="primary" @click="search()">查询</el-button>
+            </el-col>
           </el-row>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="search()">查询</el-button>
-        </el-col>
+        </el-card>
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
-          <el-table-column
-            prop="EventCode"
-            label="X轴故障"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="RequestCode"
-            label="Y轴故障"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="LineCode"
-            label="三相异步电机过载"
-            width="150"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationCode"
-            label="变频器故障"
-            width="100"
-          ></el-table-column>
+          <el-table-column prop="RequestCode" label="序号"></el-table-column>
+          <el-table-column prop="LineCode" label="名称"></el-table-column>
+          <el-table-column prop="OperationCode" label="时间"></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="三相相序不对"
-            width="120"
-          ></el-table-column>
-
-          <el-table-column
-            prop="OperationShortName"
-            label="掉料"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="吸盘到达下限位"
-            width="120"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="X轴碰到左限位"
-            width="150"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="X轴碰到右限位"
-            width="150"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="Y轴碰到上限位"
-            width="150"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="Y轴碰到下限位"
-            width="150"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="碰到软限位"
-            width="100"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="失去联机信号"
-            width="120"
-          ></el-table-column>
-          <el-table-column
-            prop="OperationShortName"
-            label="达到停机数量"
-            width="120"
+            label="事件"
           ></el-table-column>
         </el-table>
         <el-row>
@@ -141,7 +53,7 @@ export default {
   name: 'warnning',
   data() {
     return {
-      queryInfo: '',
+      value1: '',
       tableData: [
         {
           RequestCode: 'xxx1',
@@ -191,6 +103,25 @@ export default {
   methods: {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
+    handleDetail(index, row) {
+      this.$confirm('是否加工?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '成功!',
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消',
+          })
+        })
+    },
   },
 }
 </script>
@@ -201,5 +132,8 @@ export default {
 }
 .el-pagination {
   padding-top: 20px;
+}
+.text-right {
+  text-align: right;
 }
 </style>
