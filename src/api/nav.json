@@ -49,6 +49,18 @@
                     "autoName": "自建工单",
                     "path": "workOrder",
                     "children": []
+                },
+                {
+                    "id": "3-3",
+                    "autoName": "异常产品提报",
+                    "path": "abnormal",
+                    "children": []
+                },
+                {
+                    "id": "3-4",
+                    "autoName": "异常产品提交",
+                    "path": "abnormalSubmit",
+                    "children": []
                 }
             ]
         },
@@ -128,18 +140,5 @@
             "path": "warnning",
             "icon": "iconfont icon-baojing"
         }
-    ],
-    "plc1output": [
-        {},
-        {}
-    ],
-    "plc2output": [],
-    "PLCInPut1": [],
-    "PLCInPut2": [],
-    "manual": [],
-    "basic": [],
-    "electricmotor": [],
-    "manufactor": [],
-    "speed": [],
-    "warnning": []
+    ]
 }

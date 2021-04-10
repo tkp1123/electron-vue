@@ -96,6 +96,24 @@ const router = new Router({
           name: 'addWorkOrder',
           component: resolve => require(['@/components/views/workbench/addWorkOrder'], resolve)
         },
+        //异常产品提报
+        {
+          path: '/abnormal',
+          name: 'abnormal',
+          component: resolve => require(['@/components/views/workbench/abnormal'], resolve)
+        },
+        //异常产品提报详情
+        {
+          path: '/abnormalDetail',
+          name: 'abnormalDetail',
+          component: resolve => require(['@/components/views/workbench/abnormalDetail'], resolve)
+        },
+        //异常产品提交
+        {
+          path: '/abnormalsubmit',
+          name: 'abnormalsubmit',
+          component: resolve => require(['@/components/views/workbench/abnormalsubmit'], resolve)
+        },
         //手动页面
         {
           path: '/manual',

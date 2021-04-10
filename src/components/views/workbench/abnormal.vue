@@ -7,12 +7,12 @@
             <el-col :span="20" :xs="24">
               <el-row>
                 <el-col :span="7">
-                  <el-date-picker
-                    v-model="value1"
-                    type="date"
-                    placeholder="选择日期"
+                  <el-input
+                    v-model="queryInfo"
+                    clearable
+                    placeholder="请输入序号"
                   >
-                  </el-date-picker>
+                  </el-input>
                 </el-col>
               </el-row>
             </el-col>
@@ -25,12 +25,25 @@
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column prop="RequestCode" label="序号"></el-table-column>
-          <el-table-column prop="LineCode" label="名称"></el-table-column>
-          <el-table-column prop="OperationCode" label="时间"></el-table-column>
+          <el-table-column prop="LineCode" label="提交日期"></el-table-column>
+          <el-table-column
+            prop="OperationCode"
+            label="不良数量"
+          ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="事件"
+            label="报废数量"
           ></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                type="primary"
+                @click="handleDetail(scope.$index, scope.row)"
+                >详情</el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
         <el-row>
           <el-pagination
@@ -49,11 +62,11 @@
 </template>
 <script>
 export default {
-  //报警页面
-  name: 'warnning',
+  //异常产品提报
+  name: 'abnormal',
   data() {
     return {
-      value1: '',
+      queryInfo: '',
       tableData: [
         {
           RequestCode: 'xxx1',
@@ -103,6 +116,9 @@ export default {
   methods: {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
+    handleDetail(index, row) {
+      this.$router.push('/abnormalDetail')
+    },
   },
 }
 </script>
