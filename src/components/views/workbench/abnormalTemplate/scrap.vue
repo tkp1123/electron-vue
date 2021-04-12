@@ -32,14 +32,14 @@
             prop="PartMatDescription"
             label="数量"
           ></el-table-column>
-          <el-table-column
+          <!-- <el-table-column
             prop="PartMatDescription"
             label="顺序号"
           ></el-table-column>
           <el-table-column
             prop="PartMatDescription"
             label="部件条码"
-          ></el-table-column>
+          ></el-table-column> -->
         </el-table>
       </el-col>
       <el-col :span="2" :xs="24" :sm="24" :md="24" :lg="2" :xl="2">
@@ -49,14 +49,14 @@
       </el-col>
       <el-col :span="11" :xs="24" :sm="24" :md="24" :lg="11" :xl="11">
         <el-table :data="tableData" border stripe style="width: 100%">
-          <el-table-column
+          <!-- <el-table-column
             prop="PartMatCode"
             label="生产批次号"
           ></el-table-column>
           <el-table-column
             prop="PartMatDescription"
             label="数量"
-          ></el-table-column>
+          ></el-table-column> -->
           <el-table-column
             prop="PartMatDescription"
             label="顺序号"

@@ -32,33 +32,33 @@
 export default {
   computed: {
     getCollapse() {
-      return this.$store.state.isCollapse;
+      return this.$store.state.isCollapse
     },
   },
   data() {
-    return {};
+    return {}
   },
   methods: {
     loginout() {
-      var that = this;
-      this.$confirm("此操作将退出登录, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      var that = this
+      this.$confirm('此操作将退出登录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
       }).then(function () {
-        window.localStorage.clear();
-        that.$router.push("/login");
+        window.localStorage.clear()
+        that.$router.push('/login')
         that.$message({
-          type: "success",
-          message: "退出成功!",
-        });
-      });
+          type: 'success',
+          message: '退出成功!',
+        })
+      })
     },
     pointClick() {
-      this.$store.commit("collapse");
+      this.$store.commit('collapse')
     },
   },
-};
+}
 </script>
 <style lang="less" scoped>
 .el-header {

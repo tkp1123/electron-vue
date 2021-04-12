@@ -17,12 +17,6 @@
                     "autoName": "任务和工艺信息",
                     "path": "taskInformation",
                     "children": []
-                },
-                {
-                    "id": "2-2",
-                    "autoName": "部件托盘上线",
-                    "path": "trayinformation",
-                    "children": []
                 }
             ]
         },
@@ -60,6 +54,12 @@
                     "id": "3-5",
                     "autoName": "异常产品提报",
                     "path": "abnormal",
+                    "children": []
+                },
+                {
+                    "id": "3-6",
+                    "autoName": "部件托盘上线",
+                    "path": "trayinformation",
                     "children": []
                 }
             ]

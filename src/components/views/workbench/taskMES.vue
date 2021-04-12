@@ -38,14 +38,9 @@
               </el-col>
               <el-col :span="4" :xs="24">
                 <el-row>
-                  <el-col :span="24" class="row-button">
+                  <el-col :span="24">
                     <el-button type="primary" @click="search()"
-                      >切换手动模式</el-button
-                    ></el-col
-                  >
-                  <el-col :span="24" class="row-button">
-                    <el-button type="primary" @click="search()"
-                      >请求接口数据</el-button
+                      >批次获取</el-button
                     ></el-col
                   >
                 </el-row>
@@ -195,7 +190,9 @@ export default {
 .el-pagination {
   padding-top: 20px;
 }
-
+.el-row {
+  margin: 0 !important;
+}
 .panel-content-title {
   display: flex;
   color: #999;

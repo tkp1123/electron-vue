@@ -54,24 +54,6 @@ const router = new Router({
           name: 'technologyDetail',
           component: resolve => require(['@/components/views/task/technologyDetail'], resolve)
         },
-        //托盘上线
-        {
-          path: '/trayinformation',
-          name: 'trayinformation',
-          component: resolve => require(['@/components/views/task/trayinformation'], resolve)
-        },
-        //托盘上线详情
-        {
-          path: '/trayinformationDetail',
-          name: 'trayinformationDetail',
-          component: resolve => require(['@/components/views/task/trayinformationDetail'], resolve)
-        },
-        //托盘上线历史页面
-        {
-          path: '/trayinformationHistory',
-          name: 'trayinformationHistory',
-          component: resolve => require(['@/components/views/task/trayTemplate/trayinformationHistory'], resolve)
-        },
         //工作台
         // {
         //   path: '/workbench',
@@ -125,6 +107,24 @@ const router = new Router({
           path: '/abnormalsubmit',
           name: 'abnormalsubmit',
           component: resolve => require(['@/components/views/workbench/abnormalsubmit'], resolve)
+        },
+        //托盘上线
+        {
+          path: '/trayinformation',
+          name: 'trayinformation',
+          component: resolve => require(['@/components/views/workbench/trayinformation'], resolve)
+        },
+        //托盘上线详情
+        {
+          path: '/trayinformationDetail',
+          name: 'trayinformationDetail',
+          component: resolve => require(['@/components/views/workbench/trayinformationDetail'], resolve)
+        },
+        //托盘上线历史页面
+        {
+          path: '/trayinformationHistory',
+          name: 'trayinformationHistory',
+          component: resolve => require(['@/components/views/workbench/trayTemplate/trayinformationHistory'], resolve)
         },
         //手动页面
         {
@@ -203,6 +203,12 @@ const router = new Router({
           path: '/warnning',
           name: 'warnning',
           component: resolve => require(['@/components/views/warnning/warnning'], resolve)
+        },
+        //签到
+        {
+          path: '/punchClock',
+          name: 'punchClock',
+          component: resolve => require(['@/components/views/punchClock/punchClock'], resolve)
         },
       ]
     }

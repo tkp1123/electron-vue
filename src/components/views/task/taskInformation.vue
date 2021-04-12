@@ -1,6 +1,88 @@
 <template>
   <div>
     <el-card class="box-card" shadow="never">
+      <el-row :gutter="10">
+        <el-col :span="12" :xs="24" :sm="24" :md="24" :lg="24" :xl="12">
+          <el-card shadow="never" style="margin: 30px">
+            <div slot="header">
+              <div class="dp-fx">
+                <div class="dp-fx-title">信息总览</div>
+              </div>
+            </div>
+            <el-row :gutter="10">
+              <el-col :span="24" :xs="24">
+                <el-row>
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >批次总数 :xxx</el-col
+                  >
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >已完成批次总次数 :xxx</el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >任务总数 :xxx</el-col
+                  >
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >已完成任务总次数 :xxx</el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >板件总数:xxx</el-col
+                  >
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >已完成板件总数:xxx</el-col
+                  >
+                </el-row>
+              </el-col>
+              <el-col :span="12" :xs="24"> </el-col>
+            </el-row>
+          </el-card>
+        </el-col>
+      </el-row>
       <el-row :gutter="20" style="padding: 10px">
         <el-card shadow="never" style="padding: 10px">
           <el-row>
@@ -10,7 +92,7 @@
                   class="col-padd"
                   :span="6"
                   :xl="6"
-                  :lg="6"
+                  :lg="8"
                   :md="12"
                   :sm="12"
                   :xs="24"
@@ -26,7 +108,7 @@
                   class="col-padd"
                   :span="4"
                   :xl="4"
-                  :lg="4"
+                  :lg="8"
                   :md="12"
                   :sm="12"
                   :xs="24"
@@ -43,7 +125,7 @@
                   class="col-padd"
                   :span="4"
                   :xl="4"
-                  :lg="4"
+                  :lg="8"
                   :md="12"
                   :sm="12"
                   :xs="24"
@@ -60,7 +142,7 @@
                   class="col-padd"
                   :span="4"
                   :xl="4"
-                  :lg="4"
+                  :lg="8"
                   :md="12"
                   :sm="12"
                   :xs="24"
@@ -75,7 +157,7 @@
                   class="col-padd"
                   :span="6"
                   :xl="6"
-                  :lg="6"
+                  :lg="8"
                   :md="12"
                   :sm="12"
                   :xs="24"
@@ -112,7 +194,7 @@
             prop="OperationShortName"
             label="工序短名称"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="事件码"></el-table-column>
+          <el-table-column prop="EventCode" label="是否报工"></el-table-column>
           <el-table-column
             prop="EventCode"
             label="产出物料的物料编码"
@@ -251,5 +333,23 @@ export default {
 }
 .col-padd {
   padding: 5px 0;
+}
+.dp-fx {
+  display: flex;
+}
+.dp-fx-title {
+  font-size: 16px;
+  padding: 5px 0 0 5px;
+}
+.el-row {
+  margin: 0 !important;
+}
+.panel-content-title {
+  display: flex;
+  color: #999;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 14px;
+  padding: 5px;
 }
 </style>

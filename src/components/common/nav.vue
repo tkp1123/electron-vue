@@ -5,6 +5,9 @@
       <img class="img" src="@/assets/logo.png" />
       <!-- <span v-if="!getCollapse">管理系统</span> -->
     </div>
+    <div class="sign-button" @click="pointClick">
+      <div>签到</div>
+    </div>
     <el-menu
       background-color="#eceff4"
       text-color="#515a6e"
@@ -57,6 +60,11 @@ export default {
   mounted() {
     //console.log(JSON.parse(this.$store.state.user.navList));
   },
+  methods: {
+    pointClick() {
+      this.$router.push('/punchClock')
+    },
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -79,5 +87,27 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.sign-button {
+  z-index: 1002;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  min-height: 50px;
+  background-color: #c0e3f780;
+  text-align: center;
+  border: solid 1px #c0e3f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-button:active {
+  color: #409eff;
+  background-color: #c0e3f7;
 }
 </style>
