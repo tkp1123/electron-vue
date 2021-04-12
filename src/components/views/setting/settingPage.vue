@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     dialogCancel() {
-      this.$router.push('/basic')
+      this.$router.push('/welcome')
     },
     dialogOk() {
       this.dialogVisible = false
