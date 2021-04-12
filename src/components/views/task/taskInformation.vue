@@ -194,7 +194,6 @@
             prop="OperationShortName"
             label="工序短名称"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="是否报工"></el-table-column>
           <el-table-column
             prop="EventCode"
             label="产出物料的物料编码"
@@ -229,6 +228,7 @@
             prop="EventCode"
             label="任务完成时间"
           ></el-table-column>
+          <el-table-column prop="EventCode" label="是否报工"></el-table-column>
           <el-table-column label="工艺信息">
             <template slot-scope="scope">
               <el-button

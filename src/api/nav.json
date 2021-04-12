@@ -137,6 +137,18 @@
                     "autoName": "设置",
                     "path": "settingPage",
                     "children": []
+                },
+                {
+                    "id": "6-6",
+                    "autoName": "MES接口",
+                    "path": "mesInterface",
+                    "children": []
+                },
+                {
+                    "id": "6-7",
+                    "autoName": "工艺参数",
+                    "path": "processParameters",
+                    "children": []
                 }
             ]
         },

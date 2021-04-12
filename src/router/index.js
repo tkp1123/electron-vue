@@ -198,6 +198,18 @@ const router = new Router({
           name: 'settingPage',
           component: resolve => require(['@/components/views/setting/settingPage'], resolve)
         },
+        //mes接口
+        {
+          path: '/mesInterface',
+          name: 'mesInterface',
+          component: resolve => require(['@/components/views/setting/mesInterface'], resolve)
+        },
+        //工艺参数
+        {
+          path: '/processParameters',
+          name: 'processParameters',
+          component: resolve => require(['@/components/views/setting/processParameters'], resolve)
+        },
         //报警页面
         {
           path: '/warnning',

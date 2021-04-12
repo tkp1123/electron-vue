@@ -52,39 +52,29 @@
         <el-row :gutter="10">
           <el-col :span="24" :xs="24">
             <el-row :gutter="10">
-              <el-col :span="12" :xs="24">
-                <el-row>
-                  <el-col :span="24" class="panel-content-title"
-                    >批次号 :xxx</el-col
-                  >
-                  <el-col :span="24" class="panel-content-title"
-                    >工序编号 :xxx</el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="24" class="panel-content-title"
-                    >工序短名称 :xxx</el-col
-                  >
-                  <el-col :span="24" class="panel-content-title"
-                    >部件顺序号 :xxx</el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="24" class="panel-content-title"
-                    >部件唯一码 :xxx</el-col
-                  >
-                  <el-col :span="24" class="panel-content-title"
-                    >门扇款式 :xxx</el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col :span="24" class="panel-content-title"
-                    >颜色 :xxx</el-col
-                  >
-                  <el-col :span="24" class="panel-content-title"></el-col>
-                </el-row>
+              <el-col :span="12" :offset="9">
+                <el-col :span="24" class="panel-content-title"
+                  >批次号 :xxx</el-col
+                >
+                <!-- <el-col :span="24" class="panel-content-title"
+                  >工序编号 :xxx</el-col
+                >
+                <el-col :span="24" class="panel-content-title"
+                  >工序短名称 :xxx</el-col
+                > -->
+                <el-col :span="24" class="panel-content-title"
+                  >部件顺序号 :xxx</el-col
+                >
+                <el-col :span="24" class="panel-content-title"
+                  >部件唯一码 :xxx</el-col
+                >
+                <el-col :span="24" class="panel-content-title"
+                  >门扇款式 :xxx</el-col
+                >
+                <el-col :span="24" class="panel-content-title"
+                  >颜色 :xxx</el-col
+                >
               </el-col>
-              <el-col :span="12" :xs="24"> </el-col>
             </el-row>
           </el-col>
         </el-row>
@@ -130,7 +120,7 @@ export default {
   color: #909399;
   flex-direction: column;
   justify-content: center;
-  font-size: 16px;
+  font-size: 35px;
   padding: 5px;
 }
 </style>

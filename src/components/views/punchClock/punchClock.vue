@@ -106,6 +106,8 @@ export default {
     }
   },
   methods: {
+    handleSizeChange(val) {},
+    handleCurrentChange(val) {},
     dialogCancel() {
       this.$router.push('/basic')
     },

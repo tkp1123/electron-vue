@@ -110,4 +110,8 @@ export default {
   color: #409eff;
   background-color: #c0e3f7;
 }
+.el-menu-item.is-active {
+  background-color: #2d8cf0 !important;
+  color: #c0e3f7 !important;
+}
 </style>
