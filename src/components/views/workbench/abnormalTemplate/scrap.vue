@@ -9,7 +9,7 @@
                 <el-input
                   v-model="queryInfo"
                   clearable
-                  placeholder="请输入生产批次号"
+                  placeholder="请输入部件条码"
                 >
                 </el-input>
               </el-col>
@@ -32,6 +32,14 @@
             prop="PartMatDescription"
             label="数量"
           ></el-table-column>
+          <el-table-column
+            prop="PartMatDescription"
+            label="顺序号"
+          ></el-table-column>
+          <el-table-column
+            prop="PartMatDescription"
+            label="部件条码"
+          ></el-table-column>
         </el-table>
       </el-col>
       <el-col :span="2" :xs="24" :sm="24" :md="24" :lg="2" :xl="2">
@@ -43,11 +51,19 @@
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="PartMatCode"
-            label="SequenceNumber"
+            label="生产批次号"
           ></el-table-column>
           <el-table-column
             prop="PartMatDescription"
-            label="PartSerialNumber"
+            label="数量"
+          ></el-table-column>
+          <el-table-column
+            prop="PartMatDescription"
+            label="顺序号"
+          ></el-table-column>
+          <el-table-column
+            prop="PartMatDescription"
+            label="部件条码"
           ></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">

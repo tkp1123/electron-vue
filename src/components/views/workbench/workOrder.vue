@@ -5,22 +5,60 @@
         <el-card shadow="never" style="padding: 10px">
           <el-row>
             <el-col :span="20" :xs="24" :sm="20" :md="20">
-              <el-row>
-                <el-col :span="4" :xs="24" :sm="24" :md="24" :lg="4">
-                  <el-button
-                    icon="el-icon-plus"
-                    type="primary"
-                    @click="addWorkOrder()"
-                    >添加工单</el-button
+              <el-row :gutter="20">
+                <el-col
+                  class="col-padd"
+                  :span="4"
+                  :xs="24"
+                  :sm="24"
+                  :md="8"
+                  :lg="4"
+                >
+                  <el-upload
+                    class="upload-demo"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :multiple="false"
+                    :limit="1"
+                    accept=".xlsx"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
+                  >
+                    <el-button icon="el-icon-plus" type="primary"
+                      >添加工单</el-button
+                    ></el-upload
                   >
                 </el-col>
-                <el-col :span="7" :xs="24" :sm="24" :md="27" :lg="7">
-                  <el-date-picker
-                    v-model="value1"
-                    type="date"
-                    placeholder="选择日期"
+                <el-col
+                  class="col-padd"
+                  :span="7"
+                  :xs="24"
+                  :sm="24"
+                  :md="8"
+                  :lg="7"
+                >
+                  <el-input
+                    v-model="queryInfo"
+                    clearable
+                    placeholder="请输入任务单序号"
                   >
-                  </el-date-picker>
+                  </el-input>
+                </el-col>
+                <el-col
+                  class="col-padd"
+                  :span="7"
+                  :xs="24"
+                  :sm="24"
+                  :md="8"
+                  :lg="7"
+                >
+                  <el-select v-model="State" placeholder="请选择完成状态">
+                    <el-option label="已完成" value="1"> </el-option>
+                    <el-option label="进行中" value="2"> </el-option>
+                    <el-option label="未执行" value="3"> </el-option>
+                  </el-select>
                 </el-col>
               </el-row>
             </el-col>
@@ -34,30 +72,28 @@
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
-            label="任务序号"
+            label="任务单序号"
           ></el-table-column>
           <el-table-column prop="LineCode" label="品类类型"></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="待加工数量"
+            label="任务单生产数量"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="总数量"
+            label="门扇尺寸-高(mm)"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="起始时间"></el-table-column>
-          <el-table-column prop="EventCode" label="完成时间"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="门扇尺寸-宽(mm)"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="门扇尺寸-厚(mm)"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="门扇款式"></el-table-column>
+          <el-table-column prop="EventCode" label="颜色"></el-table-column>
           <el-table-column prop="EventCode" label="状态"></el-table-column>
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <el-button
-                size="mini"
-                type="primary"
-                @click="handleDetail(scope.$index, scope.row)"
-                >加工</el-button
-              >
-            </template>
-          </el-table-column>
         </el-table>
         <el-row>
           <el-pagination
@@ -80,7 +116,9 @@ export default {
   name: 'workOrder',
   data() {
     return {
-      value1: '',
+      queryInfo: '',
+      State: '',
+      fileList: [],
       tableData: [
         {
           RequestCode: 'xxx1',
@@ -130,28 +168,25 @@ export default {
   methods: {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
-    handleDetail(index, row) {
-      this.$confirm('是否加工?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-      })
-        .then(() => {
-          this.$message({
-            type: 'success',
-            message: '成功!',
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消',
-          })
-        })
+    handleRemove(file, fileList) {
+      console.log(file, fileList)
     },
-    addWorkOrder() {
-      this.$router.push('/addWorkOrder')
+    handlePreview(file) {
+      console.log(file)
     },
+    handleExceed(files, fileList) {
+      this.$message.warning(
+        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
+          files.length + fileList.length
+        } 个文件`
+      )
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`)
+    },
+    // addWorkOrder() {
+    //   this.$router.push('/addWorkOrder')
+    // },
   },
 }
 </script>
@@ -165,5 +200,8 @@ export default {
 }
 .text-right {
   text-align: right;
+}
+.col-padd {
+  padding: 5px 0;
 }
 </style>

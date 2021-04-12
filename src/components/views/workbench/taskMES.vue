@@ -10,15 +10,7 @@
                   <el-col :span="12" :xs="24">
                     <el-row>
                       <el-col :span="12" :xs="24" class="panel-content-title"
-                        >事件码 :xxx</el-col
-                      >
-                      <el-col :span="12" :xs="24" class="panel-content-title"
                         >工序编号 :xxx</el-col
-                      >
-                    </el-row>
-                    <el-row>
-                      <el-col :span="12" :xs="24" class="panel-content-title"
-                        >描述信息 :xxx</el-col
                       >
                       <el-col :span="12" :xs="24" class="panel-content-title"
                         >工序短名称 :xxx</el-col
@@ -26,9 +18,19 @@
                     </el-row>
                     <el-row>
                       <el-col :span="12" :xs="24" class="panel-content-title"
-                        >产线编号 :xxx</el-col
+                        >生产批次号 :xxx</el-col
                       >
-                      <el-col :span="12" :xs="24"></el-col>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >总任务数 :xxx</el-col
+                      >
+                    </el-row>
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单序号 :xxx</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单生产数量 :xxx</el-col
+                      >
                     </el-row>
                   </el-col>
                   <el-col :span="12" :xs="24"> </el-col>
@@ -56,21 +58,32 @@
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
-            label="任务序号"
+            label="品类类型"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="品类类型"></el-table-column>
+          <el-table-column
+            prop="LineCode"
+            label="门扇尺寸-高(mm)"
+          ></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="待加工数量"
+            label="门扇尺寸-宽(mm)"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="总数量"
+            label="门扇尺寸-厚(mm)"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="起始时间"></el-table-column>
-          <el-table-column prop="EventCode" label="完成时间"></el-table-column>
-          <el-table-column prop="EventCode" label="状态"></el-table-column>
-          <el-table-column label="操作">
+          <el-table-column prop="EventCode" label="门扇款式"></el-table-column>
+          <el-table-column prop="EventCode" label="颜色"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="部件顺序号"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="部件唯一码"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="完成状态"></el-table-column>
+          <!-- <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button
                 size="mini"
@@ -79,7 +92,7 @@
                 >加工</el-button
               >
             </template>
-          </el-table-column>
+          </el-table-column> -->
         </el-table>
         <el-row>
           <el-pagination

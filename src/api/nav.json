@@ -20,13 +20,7 @@
                 },
                 {
                     "id": "2-2",
-                    "autoName": "工艺请求",
-                    "path": "technology",
-                    "children": []
-                },
-                {
-                    "id": "2-3",
-                    "autoName": "托盘上线",
+                    "autoName": "部件托盘上线",
                     "path": "trayinformation",
                     "children": []
                 }
@@ -46,20 +40,26 @@
                 },
                 {
                     "id": "3-2",
+                    "autoName": "贴皮工序",
+                    "path": "stickingSkin",
+                    "children": []
+                },
+                {
+                    "id": "3-3",
+                    "autoName": "托盘绑定",
+                    "path": "bindTray",
+                    "children": []
+                },
+                {
+                    "id": "3-4",
                     "autoName": "自建工单",
                     "path": "workOrder",
                     "children": []
                 },
                 {
-                    "id": "3-3",
+                    "id": "3-5",
                     "autoName": "异常产品提报",
                     "path": "abnormal",
-                    "children": []
-                },
-                {
-                    "id": "3-4",
-                    "autoName": "异常产品提交",
-                    "path": "abnormalSubmit",
                     "children": []
                 }
             ]
@@ -130,6 +130,12 @@
                     "id": "6-4",
                     "autoName": "厂家参数",
                     "path": "manufactor",
+                    "children": []
+                },
+                {
+                    "id": "6-5",
+                    "autoName": "设置",
+                    "path": "settingPage",
                     "children": []
                 }
             ]

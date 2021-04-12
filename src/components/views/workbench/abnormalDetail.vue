@@ -3,7 +3,7 @@
     <el-row class="page-header">
       <el-page-header @back="goBack" content="详情页面"> </el-page-header>
     </el-row>
-    <el-row :gutter="20" style="padding: 10px">
+    <!-- <el-row :gutter="20" style="padding: 10px">
       <el-card shadow="never">
         <el-row>
           <el-col :span="20" :xs="24">
@@ -29,7 +29,7 @@
           </el-col>
         </el-row>
       </el-card>
-    </el-row>
+    </el-row> -->
     <el-row :gutter="20" class="page-tabs">
       <el-table :data="tableData" border stripe style="width: 100%">
         <el-table-column
@@ -38,11 +38,11 @@
         ></el-table-column>
         <el-table-column
           prop="PartMatDescription"
-          label="SequenceNumber"
+          label="顺序号"
         ></el-table-column>
         <el-table-column
           prop="PartMatDescription"
-          label="PartSerialNumber"
+          label="部件条码"
         ></el-table-column>
         <el-table-column
           prop="PartMatDescription"
@@ -131,7 +131,7 @@ export default {
   padding: 30px;
 }
 .page-tabs {
-  padding: 10px;
+  padding: 20px;
 }
 .dp-fx {
   display: flex;

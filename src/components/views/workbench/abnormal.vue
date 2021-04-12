@@ -4,19 +4,24 @@
       <el-row :gutter="20" style="padding: 10px">
         <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-col :span="20" :xs="24">
-              <el-row>
+            <el-col :span="16" :xs="24">
+              <el-row :gutter="20">
                 <el-col :span="7">
                   <el-input
                     v-model="queryInfo"
                     clearable
-                    placeholder="请输入序号"
+                    placeholder="请输入生产批次号"
                   >
                   </el-input>
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :span="4" :xs="24" class="text-right">
+            <el-col :span="6" :xs="24" class="text-right">
+              <el-button type="primary" @click="goSubmit()"
+                >异常产品提报</el-button
+              >
+            </el-col>
+            <el-col :span="2" :xs="24" class="text-right">
               <el-button type="primary" @click="search()">查询</el-button>
             </el-col>
           </el-row>
@@ -24,15 +29,22 @@
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
-          <el-table-column prop="RequestCode" label="序号"></el-table-column>
-          <el-table-column prop="LineCode" label="提交日期"></el-table-column>
+          <el-table-column
+            prop="RequestCode"
+            label="生产批次号"
+          ></el-table-column>
+          <el-table-column prop="LineCode" label="托盘编号"></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="不良数量"
+            label="不良品数量"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
             label="报废数量"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="请求（操作）时间"
           ></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -118,6 +130,9 @@ export default {
     handleCurrentChange(val) {},
     handleDetail(index, row) {
       this.$router.push('/abnormalDetail')
+    },
+    goSubmit() {
+      this.$router.push('/abnormalSubmit')
     },
   },
 }

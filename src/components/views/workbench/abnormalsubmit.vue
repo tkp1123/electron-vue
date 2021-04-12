@@ -1,20 +1,25 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="never">
-      <el-row class="page-tabs">
-        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-          <el-tab-pane label="不良品" name="first">
-            <Rejects></Rejects>
-          </el-tab-pane>
-          <el-tab-pane label="报废" name="second">
-            <Scrap></Scrap>
-          </el-tab-pane>
-        </el-tabs>
-      </el-row>
-      <el-row justify="center">
-        <el-col> </el-col>
-      </el-row>
-    </el-card>
+    <el-row class="page-header">
+      <el-page-header @back="goBack" content="详情页面"> </el-page-header>
+    </el-row>
+    <el-row :gutter="20" style="padding: 10px">
+      <el-card shadow="never">
+        <el-row class="page-tabs">
+          <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+            <el-tab-pane label="不良品" name="first">
+              <Rejects></Rejects>
+            </el-tab-pane>
+            <el-tab-pane label="报废" name="second">
+              <Scrap></Scrap>
+            </el-tab-pane>
+          </el-tabs>
+        </el-row>
+        <el-row justify="center">
+          <el-col> </el-col>
+        </el-row>
+      </el-card>
+    </el-row>
   </div>
 </template>
 <script>
@@ -80,6 +85,9 @@ export default {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
     handleClick(tab, event) {},
+    goBack() {
+      this.$router.push('/abnormal')
+    },
   },
 }
 </script>
@@ -93,6 +101,12 @@ export default {
 }
 .text-right {
   text-align: right;
+}
+.page-header {
+  padding: 30px;
+}
+.el-row {
+  margin: 0 !important;
 }
 .page-tabs {
   padding: 0 30px 30px 30px;

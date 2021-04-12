@@ -84,6 +84,18 @@ const router = new Router({
           name: 'taskMES',
           component: resolve => require(['@/components/views/workbench/taskMES'], resolve)
         },
+        //贴皮工序
+        {
+          path: '/stickingSkin',
+          name: 'stickingSkin',
+          component: resolve => require(['@/components/views/workbench/stickingSkin'], resolve)
+        },
+        //托盘绑定
+        {
+          path: '/bindTray',
+          name: 'bindTray',
+          component: resolve => require(['@/components/views/workbench/bindTray'], resolve)
+        },
         //自建工单
         {
           path: '/workOrder',
@@ -179,6 +191,12 @@ const router = new Router({
           path: '/manufactor',
           name: 'manufactor',
           component: resolve => require(['@/components/views/setting/manufactor'], resolve)
+        },
+        //设置页面
+        {
+          path: '/settingPage',
+          name: 'settingPage',
+          component: resolve => require(['@/components/views/setting/settingPage'], resolve)
         },
         //报警页面
         {

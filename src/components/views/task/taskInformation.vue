@@ -5,14 +5,89 @@
         <el-card shadow="never" style="padding: 10px">
           <el-row>
             <el-col :span="20" :xs="24">
-              <el-row>
-                <el-col :span="7">
+              <el-row :gutter="20">
+                <el-col
+                  class="col-padd"
+                  :span="6"
+                  :xl="6"
+                  :lg="6"
+                  :md="12"
+                  :sm="12"
+                  :xs="24"
+                >
                   <el-input
                     v-model="queryInfo"
                     clearable
-                    placeholder="请输入请求编号"
+                    placeholder="请输入生产批次号"
                   >
                   </el-input>
+                </el-col>
+                <el-col
+                  class="col-padd"
+                  :span="4"
+                  :xl="4"
+                  :lg="4"
+                  :md="12"
+                  :sm="12"
+                  :xs="24"
+                >
+                  <el-select
+                    v-model="NOKQuantity"
+                    placeholder="请选择不良品数量排序"
+                  >
+                    <el-option label="由高到低" value="1"> </el-option>
+                    <el-option label="由低到高" value="2"> </el-option>
+                  </el-select>
+                </el-col>
+                <el-col
+                  class="col-padd"
+                  :span="4"
+                  :xl="4"
+                  :lg="4"
+                  :md="12"
+                  :sm="12"
+                  :xs="24"
+                >
+                  <el-select
+                    v-model="ScrappedQuantity"
+                    placeholder="请选择报废品数量排序"
+                  >
+                    <el-option label="由高到低" value="1"> </el-option>
+                    <el-option label="由低到高" value="2"> </el-option>
+                  </el-select>
+                </el-col>
+                <el-col
+                  class="col-padd"
+                  :span="4"
+                  :xl="4"
+                  :lg="4"
+                  :md="12"
+                  :sm="12"
+                  :xs="24"
+                >
+                  <el-select v-model="State" placeholder="请选择完成状态">
+                    <el-option label="已完成" value="1"> </el-option>
+                    <el-option label="进行中" value="2"> </el-option>
+                    <el-option label="未执行" value="3"> </el-option>
+                  </el-select>
+                </el-col>
+                <el-col
+                  class="col-padd"
+                  :span="6"
+                  :xl="6"
+                  :lg="6"
+                  :md="12"
+                  :sm="12"
+                  :xs="24"
+                >
+                  <el-date-picker
+                    v-model="value1"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="起始日期"
+                    end-placeholder="截至日期"
+                  >
+                  </el-date-picker>
                 </el-col>
               </el-row>
             </el-col>
@@ -38,6 +113,40 @@
             label="工序短名称"
           ></el-table-column>
           <el-table-column prop="EventCode" label="事件码"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="产出物料的物料编码"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="产出物料的物料名称或描述"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="生产批次号"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="请求(操作)时间"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="不良品数量"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="报废品数量"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="总任务数"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="已完成任务数"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="完成状态"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="任务完成时间"
+          ></el-table-column>
           <el-table-column label="工艺信息">
             <template slot-scope="scope">
               <el-button
@@ -70,6 +179,10 @@ export default {
   data() {
     return {
       queryInfo: '',
+      NOKQuantity: '',
+      ScrappedQuantity: '',
+      value1: '',
+      State: '',
       tableData: [
         {
           RequestCode: 'xxx1',
@@ -135,5 +248,8 @@ export default {
 }
 .text-right {
   text-align: right;
+}
+.col-padd {
+  padding: 5px 0;
 }
 </style>

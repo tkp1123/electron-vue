@@ -42,17 +42,15 @@
       </el-col>
     </el-row>
     <el-row class="page-tabs">
-      <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-        <!-- <el-tab-pane label="工艺信息" name="first">
-          <CraftList></CraftList>
-        </el-tab-pane> -->
+      <MaterielList></MaterielList>
+      <!-- <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="投入主板物料集合" name="first">
           <MaterielList></MaterielList
         ></el-tab-pane>
         <el-tab-pane label="生产任务单集合" name="second"
           ><TaskList></TaskList
         ></el-tab-pane>
-      </el-tabs>
+      </el-tabs> -->
     </el-row>
   </div>
 </template>

@@ -6,15 +6,13 @@
           <el-row>
             <el-col :span="20" :xs="24">
               <el-row>
-                <el-col :span="10">
-                  <el-date-picker
-                    v-model="value1"
-                    type="daterange"
-                    range-separator="至"
-                    start-placeholder="起始日期"
-                    end-placeholder="截至日期"
+                <el-col :span="7">
+                  <el-input
+                    v-model="queryInfo"
+                    clearable
+                    placeholder="请输入托盘号/生产条码号"
                   >
-                  </el-date-picker>
+                  </el-input>
                 </el-col>
               </el-row>
             </el-col>
@@ -28,14 +26,39 @@
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
-            label="异常名称"
+            label="生产批次号"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="异常编号"></el-table-column>
-          <el-table-column prop="OperationCode" label="时间"></el-table-column>
-          <!-- <el-table-column
+          <el-table-column prop="LineCode" label="任务单号"></el-table-column>
+          <el-table-column
+            prop="OperationCode"
+            label="生产条码号"
+          ></el-table-column>
+          <el-table-column
             prop="OperationShortName"
-            label="事件"
-          ></el-table-column> -->
+            label="顺序号"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="产出物料编号"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="部件总数量"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="托盘号"
+          ></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                type="primary"
+                @click="handleCancel(scope.$index, scope.row)"
+                >取消</el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
         <el-row>
           <el-pagination
@@ -54,11 +77,11 @@
 </template>
 <script>
 export default {
-  //报警页面
-  name: 'warnning',
+  //托盘绑定
+  name: 'bindTray',
   data() {
     return {
-      value1: '',
+      queryInfo: '',
       tableData: [
         {
           RequestCode: 'xxx1',
@@ -108,6 +131,7 @@ export default {
   methods: {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
+    handleCancel(index, row) {},
   },
 }
 </script>
