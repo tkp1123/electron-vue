@@ -45,7 +45,7 @@
           ></el-table-column>
           <el-table-column prop="EventCode" label="能否上线"></el-table-column>
           <el-table-column prop="EventCode" label="等待时间"></el-table-column>
-          <el-table-column label="部件集合">
+          <!-- <el-table-column label="部件集合">
             <template slot-scope="scope">
               <el-button
                 size="mini"
@@ -53,7 +53,7 @@
                 >详情</el-button
               >
             </template>
-          </el-table-column>
+          </el-table-column> -->
         </el-table>
         <el-row>
           <el-pagination

@@ -54,91 +54,34 @@
             <el-row :gutter="10">
               <el-col :span="12" :xs="24">
                 <el-row>
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >批次号 :xxx</el-col
                   >
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >工序编号 :xxx</el-col
                   >
                 </el-row>
                 <el-row>
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >工序短名称 :xxx</el-col
                   >
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >部件顺序号 :xxx</el-col
                   >
                 </el-row>
                 <el-row>
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >部件唯一码 :xxx</el-col
                   >
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >门扇款式 :xxx</el-col
                   >
                 </el-row>
                 <el-row>
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
+                  <el-col :span="24" class="panel-content-title"
                     >颜色 :xxx</el-col
                   >
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
-                  ></el-col>
+                  <el-col :span="24" class="panel-content-title"></el-col>
                 </el-row>
               </el-col>
               <el-col :span="12" :xs="24"> </el-col>
@@ -184,10 +127,10 @@ export default {
 }
 .panel-content-title {
   display: flex;
-  color: #999;
+  color: #909399;
   flex-direction: column;
   justify-content: center;
-  font-size: 14px;
+  font-size: 16px;
   padding: 5px;
 }
 </style>
