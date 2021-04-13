@@ -2,19 +2,25 @@
   <!-- 头部  -->
   <div class="navbar">
     <el-row :gutter="10">
-      <el-col :span="4" class="text-left">
+      <el-col :span="2" class="text-left">
         <i
           :class="getCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
           style="padding-left: 20px"
           @click="pointClick"
         ></i>
       </el-col>
-      <el-col :span="16" class="text-right">
+      <el-col :span="20" class="text-right">
         <el-row>
-          <el-col>工作模式 : 自动</el-col>
+          <el-col :span="14" class="grid-content"> </el-col>
+          <el-col :span="10">
+            <el-row :gutter="20" class="text-right-dropdown">
+              <el-col :span="8" :offset="4">工作模式 : 自动</el-col>
+              <el-col :span="8" :offset="4">工作状态 : 空闲</el-col>
+            </el-row>
+          </el-col>
         </el-row>
       </el-col>
-      <el-col :span="4" class="text-right-dropdown">
+      <el-col :span="2" class="text-right-dropdown">
         <el-dropdown>
           <span class="el-dropdown-link user-span">
             <img src="@/assets/touxiang.jpg" class="head-portrait" />
@@ -125,5 +131,9 @@ export default {
 .text-left {
   text-align: left;
   line-height: 65px;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
 }
 </style>

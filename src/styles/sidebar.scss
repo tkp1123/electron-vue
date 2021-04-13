@@ -60,15 +60,15 @@
     // menu hover
     .submenu-title-noDropdown,
     .el-submenu__title {
-      &:hover {
-        background-color: $menuHover !important;
-        color: $menuActiveText !important;
-      }
+       &:hover {
+         background-color: #eceff4 !important;
+        color: $subMenuActiveText !important;
+       }
     }
     .el-menu-item{
       &:hover {
-        background-color: $subMenuHover !important;
-        color: $menuActiveText !important;
+        background-color: $subMenuActiveText !important;
+        color: $menuBg !important;
       }
     }
     .is-active>.el-submenu__title {
@@ -83,8 +83,8 @@
       min-width: $sideBarWidth !important;
       background-color: $subMenuBg ;
       &:hover {
-        color: $menuActiveText !important;
-        background-color: $menuHover !important;
+        background-color: $subMenuActiveText !important;
+        color: $subMenuHover !important;
       }
     }
   }
