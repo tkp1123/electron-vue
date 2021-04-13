@@ -84,6 +84,12 @@ const router = new Router({
           name: 'workOrder',
           component: resolve => require(['@/components/views/workbench/workOrder'], resolve)
         },
+        //自建工单详情
+        {
+          path: '/workOrderDetail',
+          name: 'workOrderDetail',
+          component: resolve => require(['@/components/views/workbench/workOrderDetail'], resolve)
+        },
         //添加工单
         {
           path: '/addWorkOrder',

@@ -42,23 +42,9 @@
                   <el-input
                     v-model="queryInfo"
                     clearable
-                    placeholder="请输入任务单序号"
+                    placeholder="请输入生产批次号"
                   >
                   </el-input>
-                </el-col>
-                <el-col
-                  class="col-padd"
-                  :span="7"
-                  :xs="24"
-                  :sm="24"
-                  :md="8"
-                  :lg="7"
-                >
-                  <el-select v-model="State" placeholder="请选择完成状态">
-                    <el-option label="已完成" value="1"> </el-option>
-                    <el-option label="进行中" value="2"> </el-option>
-                    <el-option label="未执行" value="3"> </el-option>
-                  </el-select>
                 </el-col>
               </el-row>
             </el-col>
@@ -72,28 +58,44 @@
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
-            label="任务单序号"
+            label="请求编号"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="品类类型"></el-table-column>
+          <el-table-column prop="LineCode" label="产线编号"></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="任务单生产数量"
+            label="工序编号"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="门扇尺寸-高(mm)"
+            label="工序短名称"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="事件码"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="产出物料的物料编码"
           ></el-table-column>
           <el-table-column
             prop="EventCode"
-            label="门扇尺寸-宽(mm)"
+            label="产出物料的物料名称或描述"
           ></el-table-column>
           <el-table-column
             prop="EventCode"
-            label="门扇尺寸-厚(mm)"
+            label="生产批次号"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="门扇款式"></el-table-column>
-          <el-table-column prop="EventCode" label="颜色"></el-table-column>
-          <el-table-column prop="EventCode" label="状态"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="请求(操作)时间"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="总任务数"></el-table-column>
+          <el-table-column label="工艺信息">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleDetail(scope.$index, scope.row)"
+                >详情</el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
         <el-row>
           <el-pagination
@@ -170,6 +172,9 @@ export default {
     handleCurrentChange(val) {},
     handleRemove(file, fileList) {
       console.log(file, fileList)
+    },
+    handleDetail(index, row) {
+      this.$router.push('/workOrderDetail')
     },
     handlePreview(file) {
       console.log(file)

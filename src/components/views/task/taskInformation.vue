@@ -229,6 +229,7 @@
             label="任务完成时间"
           ></el-table-column>
           <el-table-column prop="EventCode" label="是否报工"></el-table-column>
+          <el-table-column prop="SourceInfo" label="数据来源"></el-table-column>
           <el-table-column label="工艺信息">
             <template slot-scope="scope">
               <el-button

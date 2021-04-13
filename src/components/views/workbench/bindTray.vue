@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-card class="box-card" shadow="never">
-      <el-row :gutter="20" style="padding: 10px">
+      <el-row :gutter="10" style="padding: 10px">
         <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-col :span="20" :xs="24">
+            <el-col :span="16" :xs="24">
               <el-row>
                 <el-col :span="7">
                   <el-input
@@ -18,6 +18,9 @@
             </el-col>
             <el-col :span="4" :xs="24" class="text-right">
               <el-button type="primary" @click="search()">查询</el-button>
+            </el-col>
+            <el-col :span="4" :xs="24" class="text-center">
+              <el-button type="primary" @click="search()">提交</el-button>
             </el-col>
           </el-row>
         </el-card>
@@ -145,5 +148,8 @@ export default {
 }
 .text-right {
   text-align: right;
+}
+.text-center {
+  text-align: center;
 }
 </style>
