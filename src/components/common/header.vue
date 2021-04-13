@@ -11,8 +11,17 @@
       </el-col>
       <el-col :span="20" class="text-right">
         <el-row>
-          <el-col :span="14" class="grid-content"> </el-col>
-          <el-col :span="10">
+          <el-col
+            :span="16"
+            :xl="16"
+            :lg="14"
+            :md="8"
+            :sm="4"
+            :xs="0"
+            class="grid-content"
+          >
+          </el-col>
+          <el-col :span="8" :xl="8" :lg="10" :md="16" :sm="20" :xs="24">
             <el-row :gutter="20" class="text-right-dropdown">
               <el-col :span="8" :offset="4">工作模式 : 自动</el-col>
               <el-col :span="8" :offset="4">工作状态 : 空闲</el-col>
