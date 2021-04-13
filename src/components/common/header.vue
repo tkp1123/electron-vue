@@ -1,31 +1,41 @@
 <template>
   <!-- 头部  -->
   <div class="navbar">
-    <i
-      :class="getCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
-      style="padding-left: 20px"
-      @click="pointClick"
-    ></i>
-    <!-- <el-button @click="loginout">退出</el-button> -->
-    <el-dropdown>
-      <span class="el-dropdown-link user-span">
-        <img src="@/assets/touxiang.jpg" class="head-portrait" />
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>
-          <i class="icon iconfont icon-user"></i>
-          <span class="icon-span">个人信息</span>
-        </el-dropdown-item>
-        <el-dropdown-item>
-          <i class="icon iconfont icon-edit-square"></i>
-          <span class="icon-span">修改资料</span>
-        </el-dropdown-item>
-        <el-dropdown-item divided @click.native="loginout">
-          <i class="icon iconfont icon-poweroff"></i>
-          <span class="icon-span">退出</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <el-row :gutter="10">
+      <el-col :span="4" class="text-left">
+        <i
+          :class="getCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
+          style="padding-left: 20px"
+          @click="pointClick"
+        ></i>
+      </el-col>
+      <el-col :span="16" class="text-right">
+        <el-row>
+          <el-col>工作模式 : 自动</el-col>
+        </el-row>
+      </el-col>
+      <el-col :span="4" class="text-right-dropdown">
+        <el-dropdown>
+          <span class="el-dropdown-link user-span">
+            <img src="@/assets/touxiang.jpg" class="head-portrait" />
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <i class="icon iconfont icon-user"></i>
+              <span class="icon-span">个人信息</span>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <i class="icon iconfont icon-edit-square"></i>
+              <span class="icon-span">修改资料</span>
+            </el-dropdown-item>
+            <el-dropdown-item divided @click.native="loginout">
+              <i class="icon iconfont icon-poweroff"></i>
+              <span class="icon-span">退出</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>
@@ -91,18 +101,29 @@ export default {
 .head-portrait {
   width: 45px;
   border-radius: 50%;
-  margin: 10px;
+  margin: 10px 10px 0 0;
   float: right;
 }
 .navbar {
   background-color: #fff;
-  display: flex;
-  justify-content: space-between;
   padding-left: 0;
   align-items: center;
   color: #515a6e;
   width: 100%;
-  position: relative;
   border-bottom: 1px solid #0000001a;
+}
+.el-row {
+  margin: 0 !important;
+}
+.text-right {
+  text-align: right;
+  line-height: 65px;
+}
+.text-right-dropdown {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+  line-height: 65px;
 }
 </style>
