@@ -3,7 +3,7 @@
     <el-row class="page-header">
       <el-page-header @back="goBack" content="详情页面"> </el-page-header>
     </el-row>
-    <el-row :gutter="20" style="padding: 10px">
+    <el-row :gutter="20" style="padding: 10px 150px">
       <el-card shadow="never">
         <el-row class="page-tabs">
           <el-tabs v-model="activeName" type="card" @tab-click="handleClick">

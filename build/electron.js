@@ -9,7 +9,9 @@ let mainWindow
 const menu = electron.Menu
 function createWindow() {
   menu.setApplicationMenu(null)
-  mainWindow = new BrowserWindow({})
+  mainWindow = new BrowserWindow({
+    resizable: false //禁止改变主窗口尺寸
+  })
   mainWindow.maximize()
   mainWindow.show()
 

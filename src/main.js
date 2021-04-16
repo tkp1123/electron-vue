@@ -11,7 +11,6 @@ import './assets/fonts/iconfont.css'
 import '@/styles/index.scss'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({

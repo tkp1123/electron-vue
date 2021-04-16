@@ -15,10 +15,10 @@ export default {
 .el-main {
   position: absolute;
   padding: 0;
-  top: 66px;
+  top: 65px;
   width: 100%;
   bottom: 0;
-  background-color: #fff;
+  // background-color: #f2f2f2;
 }
 .el-main::-webkit-scrollbar {
   width: 2px;
