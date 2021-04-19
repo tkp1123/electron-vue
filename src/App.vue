@@ -5,11 +5,16 @@
     </transition>
   </div>
 </template>
-
 <script>
+import { webSoc } from './common/socket'
 export default {
-  name: "App",
-};
+  name: 'App',
+  data() {
+    return {}
+  },
+  mounted() {},
+  methods: {},
+}
 </script>
 
 <style>

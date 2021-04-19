@@ -11,11 +11,11 @@ const service = axios.create({
 // 2.请求拦截器
 service.interceptors.request.use(config => {
     //发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
-    config.data = JSON.stringify(config.data); //数据转化json
+    //config.data = JSON.stringify(config.data); //数据转化json
     //配置请求头
-    config.headers = {
-        'Content-Type': 'application/json; charset=utf-8'
-    }
+    // config.headers = {
+    //     'Content-Type': 'application/json; charset=utf-8'
+    // }
     //这里是请求头或者params里设置token
     //const token = getCookie('名称');//这里取token之前，你肯定需要先拿到token,存一下
     //if (token) {

@@ -174,7 +174,9 @@
               </el-row>
             </el-col>
             <el-col :span="4" :xs="24" class="text-right">
-              <el-button type="primary" @click="search()">查询</el-button>
+              <el-button type="primary" @click="getIssue_task_search()"
+                >查询</el-button
+              >
             </el-col>
           </el-row>
         </el-card>
@@ -182,16 +184,16 @@
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
-            prop="RequestCode"
+            prop="requestCode"
             label="请求编号"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="产线编号"></el-table-column>
+          <el-table-column prop="lineCode" label="产线编号"></el-table-column>
           <el-table-column
-            prop="OperationCode"
+            prop="operationCode"
             label="工序编号"
           ></el-table-column>
           <el-table-column
-            prop="OperationShortName"
+            prop="operationShortName"
             label="工序短名称"
           ></el-table-column>
           <el-table-column
@@ -207,8 +209,9 @@
             label="生产批次号"
           ></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="created"
             label="请求(操作)时间"
+            :formatter="formatDate"
           ></el-table-column>
           <el-table-column
             prop="EventCode"
@@ -244,11 +247,11 @@
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="1"
+            :current-page="currentPage"
             :page-sizes="[10, 20, 30]"
-            :page-size="10"
+            :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="6"
+            :total="total"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -256,6 +259,8 @@
   </div>
 </template>
 <script>
+import { issue_task } from '@/api/cloudApi'
+import { dateUtil } from '../../../common/dateUtil'
 export default {
   //任务和工艺信息
   name: 'taskInformation',
@@ -264,59 +269,64 @@ export default {
       queryInfo: '',
       NOKQuantity: '',
       ScrappedQuantity: '',
-      value1: '',
       State: '',
-      tableData: [
-        {
-          RequestCode: 'xxx1',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx2',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx3',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx4',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx5',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx6',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-      ],
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
+      value1: '',
+      tableData: [],
     }
   },
+  mounted() {
+    this.getIssue_task()
+  },
   methods: {
-    handleSizeChange(val) {},
-    handleCurrentChange(val) {},
+    getIssue_task() {
+      let param = {
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+        sortDirection: 'DESC',
+        LineCode: '',
+        operationCode: '',
+        createBegin: dateUtil.dateValue(this.value1[0]),
+        createEnd: dateUtil.dateValue(this.value1[1]),
+      }
+      issue_task(param).then((res) => {
+        console.log(res)
+        this.tableData = res.data.items
+        this.total = res.data.itemCount
+      })
+    },
+    getIssue_task_search() {
+      this.currentPage = 1
+      this.getIssue_task()
+    },
+    dateValue(val) {
+      if (!val) return ''
+      let date = new Date(val).valueOf()
+      return date
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      console.log(`每页 ${val} 条`)
+      this.currentPage = 1
+      this.getIssue_task()
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`当前页: ${val}`)
+      this.getIssue_task()
+    },
     handleDetail(index, row) {
-      this.$router.push('/taskInformationDetail')
+      console.log(row)
+      this.$router.push({
+        path: '/taskInformationDetail',
+        query: { id: row.id },
+      })
+    },
+    formatDate(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
     },
   },
 }
