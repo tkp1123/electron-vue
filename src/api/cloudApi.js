@@ -18,6 +18,9 @@ export function task_sets(params) {
 export function mes_info(params) {
     return http.get(`${resquest}/api/mes-info`, params)
 }
+export function mes_info_parameterName(param) {
+    return http.get(`${resquest}/api/mes-info/parameterName/${param.parameterName}`)
+}
 //mes接口修改 /api/mes-info
 export function mes_info_upgrade(param, data) {
     console.log(data)
@@ -25,9 +28,22 @@ export function mes_info_upgrade(param, data) {
 }
 //根据部件顺序号获取全部任务信息    贴皮工序
 export function siemens_task_all(params) {
-    return http.get(`${resquest}/api/siemens/task-all/${param.id}`, params)
+    return http.get(`${resquest}/api/siemens/task-all/${params}`)
 }
 //托盘绑定    MES提供给产线上位机调用的产品与托盘绑定信息的接口
 export function bing_pallet(params) {
     return http.post(`${resquest}/api/siemens-interaction/bing-pallet`, params)
+}
+//异常产品提报
+//1.MES提供给产线上位机调用的不良品反馈信息接口  /api/siemens-interaction/ng-report
+export function interaction_ng_report(params) {
+    return http.post(`${resquest}/api/siemens-interaction/ng-report`, params)
+}
+//2.异常产品提报分页查询 /api/siemens/abnormal-parts
+export function abnormal_parts(params) {
+    return http.get(`${resquest}/api/siemens/abnormal-parts`, params)
+}
+//3.异常产品详情分页查询  /api/siemens/abnormal-parts/parts
+export function abnormal_parts_parts(params) {
+    return http.get(`${resquest}/api/siemens/abnormal-parts/parts`, params)
 }

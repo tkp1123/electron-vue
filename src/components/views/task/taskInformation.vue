@@ -292,9 +292,10 @@ export default {
         createEnd: dateUtil.dateValue(this.value1[1]),
       }
       issue_task(param).then((res) => {
-        console.log(res)
-        this.tableData = res.data.items
-        this.total = res.data.itemCount
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
       })
     },
     getIssue_task_search() {
@@ -318,13 +319,14 @@ export default {
       this.getIssue_task()
     },
     handleDetail(index, row) {
-      console.log(row)
       this.$router.push({
         path: '/taskInformationDetail',
         query: { id: row.id },
       })
     },
     formatDate(row, column, cellValue) {
+      console.log(row)
+      console.log(column)
       if (!cellValue) return ''
       return dateUtil.fullFormatter(new Date(cellValue))
     },

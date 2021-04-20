@@ -7,7 +7,7 @@
             <el-row>
               <el-col :span="7">
                 <el-input
-                  v-model="queryInfo"
+                  v-model="sequenceNumber"
                   clearable
                   placeholder="请输入序号"
                 >
@@ -16,7 +16,9 @@
             </el-row>
           </el-col>
           <el-col :span="4" :xs="24" class="text-right">
-            <el-button type="primary" @click="search()">查询</el-button>
+            <el-button type="primary" @click="search_getSiemens_task_all()"
+              >查询</el-button
+            >
           </el-col>
         </el-row>
       </el-card>
@@ -52,28 +54,37 @@
         <el-row :gutter="10">
           <el-col :span="24" :xs="24">
             <el-row :gutter="10">
-              <el-col :span="12" :offset="9">
-                <el-col :span="24" class="panel-content-title"
-                  >批次号 :xxx</el-col
-                >
-                <!-- <el-col :span="24" class="panel-content-title"
-                  >工序编号 :xxx</el-col
-                >
-                <el-col :span="24" class="panel-content-title"
-                  >工序短名称 :xxx</el-col
-                > -->
-                <el-col :span="24" class="panel-content-title"
-                  >部件顺序号 :xxx</el-col
-                >
-                <el-col :span="24" class="panel-content-title"
-                  >部件唯一码 :xxx</el-col
-                >
-                <el-col :span="24" class="panel-content-title"
-                  >门扇款式 :xxx</el-col
-                >
-                <el-col :span="24" class="panel-content-title"
-                  >颜色 :xxx</el-col
-                >
+              <el-col :span="12" :offset="7">
+                <el-col :span="24" class="panel-content-title">
+                  <el-row :gutter="10">
+                    <el-col :span="10">颜色 :</el-col>
+                    <el-col :span="14">{{ Color }}</el-col>
+                  </el-row>
+                </el-col>
+                <el-col :span="24" class="panel-content-title">
+                  <el-row :gutter="10">
+                    <el-col :span="10">批次号 :</el-col>
+                    <el-col :span="14">{{ ProductionBatchCode }}</el-col>
+                  </el-row>
+                </el-col>
+                <el-col :span="24" class="panel-content-title">
+                  <el-row :gutter="10">
+                    <el-col :span="10">门扇款式 :</el-col>
+                    <el-col :span="14">{{ DoorPocket_Style }}</el-col>
+                  </el-row>
+                </el-col>
+                <el-col :span="24" class="panel-content-title">
+                  <el-row :gutter="10">
+                    <el-col :span="10">部件顺序号 :</el-col>
+                    <el-col :span="14">{{ SequenceNumber }}</el-col>
+                  </el-row>
+                </el-col>
+                <el-col :span="24" class="panel-content-title">
+                  <el-row :gutter="10">
+                    <el-col :span="10">部件唯一码 :</el-col>
+                    <el-col :span="14">{{ PartSerialNumber }}</el-col>
+                  </el-row>
+                </el-col>
               </el-col>
             </el-row>
           </el-col>
@@ -83,15 +94,47 @@
   </div>
 </template>
 <script>
+import { siemens_task_all } from '@/api/cloudApi'
 export default {
   //贴皮工序
   name: 'stickingSkin',
   data() {
     return {
-      queryInfo: '',
+      sequenceNumber: '',
+      //批次号
+      ProductionBatchCode: '',
+      //部件顺序号
+      SequenceNumber: '',
+      //部件唯一码
+      PartSerialNumber: '',
+      //门扇款式
+      DoorPocket_Style: '',
+      //颜色
+      Color: '',
     }
   },
-  methods: {},
+  mounted() {
+    this.getSiemens_task_all()
+  },
+  methods: {
+    getSiemens_task_all() {
+      siemens_task_all(this.sequenceNumber).then((res) => {
+        if (res.name == '') {
+          this.ProductionBatchCode = res.data.processInfoVo.productionBatchCode
+          this.SequenceNumber =
+            res.data.processInfoVo.taskSetsVos[0].partSetsVos[0].sequenceNumber
+          this.PartSerialNumber =
+            res.data.processInfoVo.taskSetsVos[0].partSetsVos[0].partSerialNumber
+          this.DoorPocket_Style =
+            res.data.processInfoVo.taskSetsVos[0].doorLeafStyle
+          this.Color = res.data.processInfoVo.boardMaterialSetsVos[0].color
+        }
+      })
+    },
+    search_getSiemens_task_all() {
+      this.getSiemens_task_all()
+    },
+  },
 }
 </script>
 <style  lang="less" scoped>

@@ -22,7 +22,9 @@
               >
             </el-col>
             <el-col :span="2" :xs="24" class="text-right">
-              <el-button type="primary" @click="search()">查询</el-button>
+              <el-button type="primary" @click="abnormal_parts_search()"
+                >查询</el-button
+              >
             </el-col>
           </el-row>
         </el-card>
@@ -30,21 +32,22 @@
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
-            prop="RequestCode"
+            prop="productionBatchCode"
             label="生产批次号"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="托盘编号"></el-table-column>
+          <el-table-column prop="palletCode" label="托盘编号"></el-table-column>
           <el-table-column
-            prop="OperationCode"
+            prop="nokQuantity"
             label="不良品数量"
           ></el-table-column>
           <el-table-column
-            prop="OperationShortName"
+            prop="scrappedQuantity"
             label="报废数量"
           ></el-table-column>
           <el-table-column
-            prop="OperationShortName"
+            prop="created"
             label="请求（操作）时间"
+            :formatter="formatDate"
           ></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -61,11 +64,11 @@
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="1"
+            :current-page="currentPage"
             :page-sizes="[10, 20, 30]"
-            :page-size="10"
+            :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="6"
+            :total="total"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -73,66 +76,65 @@
   </div>
 </template>
 <script>
+import { abnormal_parts } from '@/api/cloudApi'
+import { dateUtil } from '../../../common/dateUtil'
 export default {
   //异常产品提报
   name: 'abnormal',
   data() {
     return {
       queryInfo: '',
-      tableData: [
-        {
-          RequestCode: 'xxx1',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx2',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx3',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx4',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx5',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx6',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-      ],
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
+      tableData: [],
     }
   },
+  mounted() {
+    this.get_abnormal_parts()
+  },
   methods: {
-    handleSizeChange(val) {},
-    handleCurrentChange(val) {},
+    get_abnormal_parts() {
+      let param = {
+        productionBatchCode: this.queryInfo,
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+        sortDirection: 'DESC',
+      }
+      abnormal_parts(param).then((res) => {
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
+      })
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      console.log(`每页 ${val} 条`)
+      this.currentPage = 1
+      this.get_abnormal_parts()
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`当前页: ${val}`)
+      this.get_abnormal_parts()
+    },
+    abnormal_parts_search() {
+      this.currentPage = 1
+      this.get_abnormal_parts()
+    },
     handleDetail(index, row) {
-      this.$router.push('/abnormalDetail')
+      this.$router.push({
+        path: '/abnormalDetail',
+        query: { id: row.productionBatchCode },
+      })
     },
     goSubmit() {
       this.$router.push('/abnormalSubmit')
+    },
+    formatDate(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
     },
   },
 }

@@ -129,12 +129,13 @@ export default {
         id: this.queryInfo,
         pageIndex: this.currentPage,
         pageSize: this.pageSize,
-        sortDirection: 'DESC',
+        sortDirection: 'ASC',
       }
       mes_info(param).then((res) => {
-        console.log(res)
-        this.tableData = res.data.items
-        this.total = res.data.itemCount
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
       })
     },
     getMes_info_search() {

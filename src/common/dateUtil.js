@@ -61,6 +61,7 @@ class DateUtil {
     }
     //完整时间格式
     fullFormatter(date) {
+        //有时区问题,需要处理
         let year = this.yearData(date)
         let month = this.monthData(date)
         let day = this.dayData(date)

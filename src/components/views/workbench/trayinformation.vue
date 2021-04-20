@@ -19,11 +19,6 @@
             <el-col :span="4" :xs="24" class="text-right">
               <el-button type="primary" @click="search()">查询</el-button>
             </el-col>
-            <!-- <el-col :span="4" :xs="24" class="text-right">
-              <el-button type="primary" @click="checkHistory()"
-                >查看历史纪录</el-button
-              >
-            </el-col> -->
           </el-row>
         </el-card>
       </el-row>

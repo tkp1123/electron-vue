@@ -43,17 +43,17 @@ const router = new Router({
           component: resolve => require(['@/components/views/task/taskInformationDetail'], resolve)
         },
         //工艺请求
-        {
-          path: '/technology',
-          name: 'technology',
-          component: resolve => require(['@/components/views/task/technology'], resolve)
-        },
+        // {
+        //   path: '/technology',
+        //   name: 'technology',
+        //   component: resolve => require(['@/components/views/task/technology'], resolve)
+        // },
         //工艺请求详情
-        {
-          path: '/technologyDetail',
-          name: 'technologyDetail',
-          component: resolve => require(['@/components/views/task/technologyDetail'], resolve)
-        },
+        // {
+        //   path: '/technologyDetail',
+        //   name: 'technologyDetail',
+        //   component: resolve => require(['@/components/views/task/technologyDetail'], resolve)
+        // },
         //工作台
         // {
         //   path: '/workbench',
@@ -121,17 +121,17 @@ const router = new Router({
           component: resolve => require(['@/components/views/workbench/trayinformation'], resolve)
         },
         //托盘上线详情
-        {
-          path: '/trayinformationDetail',
-          name: 'trayinformationDetail',
-          component: resolve => require(['@/components/views/workbench/trayinformationDetail'], resolve)
-        },
-        //托盘上线历史页面
-        {
-          path: '/trayinformationHistory',
-          name: 'trayinformationHistory',
-          component: resolve => require(['@/components/views/workbench/trayTemplate/trayinformationHistory'], resolve)
-        },
+        // {
+        //   path: '/trayinformationDetail',
+        //   name: 'trayinformationDetail',
+        //   component: resolve => require(['@/components/views/workbench/trayinformationDetail'], resolve)
+        // },
+        // //托盘上线历史页面
+        // {
+        //   path: '/trayinformationHistory',
+        //   name: 'trayinformationHistory',
+        //   component: resolve => require(['@/components/views/workbench/trayTemplate/trayinformationHistory'], resolve)
+        // },
         //手动页面
         {
           path: '/manual',

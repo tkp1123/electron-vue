@@ -22,9 +22,7 @@
                   :lg="12"
                   :xl="12"
                   class="panel-content-title"
-                  >产出物料的物料编码 :{{
-                    process_infoData[0].partMatCode
-                  }}</el-col
+                  >产出物料的物料编码 :{{ partMatCode }}</el-col
                 >
                 <el-col
                   :span="12"
@@ -34,9 +32,7 @@
                   :lg="12"
                   :xl="12"
                   class="panel-content-title"
-                  >产出物料的物料名称或描述 :{{
-                    process_infoData[0].partMatDescription
-                  }}</el-col
+                  >产出物料的物料名称或描述 :{{ partMatDescription }}</el-col
                 >
               </el-row>
               <el-row>
@@ -48,9 +44,7 @@
                   :lg="12"
                   :xl="12"
                   class="panel-content-title"
-                  >产出物料的数量 :{{
-                    process_infoData[0].partsQuantity
-                  }}</el-col
+                  >产出物料的数量 :{{ partsQuantity }}</el-col
                 >
                 <el-col
                   :span="12"
@@ -60,9 +54,7 @@
                   :lg="12"
                   :xl="12"
                   class="panel-content-title"
-                  >生产批次号 :{{
-                    process_infoData[0].productionBatchCode
-                  }}</el-col
+                  >生产批次号 :{{ productionBatchCode }}</el-col
                 >
               </el-row>
               <el-row>
@@ -74,7 +66,7 @@
                   :lg="12"
                   :xl="12"
                   class="panel-content-title"
-                  >请求（操作）时间 :{{ process_infoData[0].created }}</el-col
+                  >请求（操作）时间 :{{ createdTime }}</el-col
                 >
                 <el-col :span="12" :xs="24"></el-col>
               </el-row>
@@ -84,7 +76,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row class="page-tabs">
+    <el-row>
       <el-card class="box-card" shadow="never">
         <el-card shadow="never" style="padding: 10px">
           <el-row :gutter="20">
@@ -254,15 +246,13 @@ export default {
       value1: '',
       State: '',
       total: 0,
-      process_infoData: [
-        {
-          partMatCode: '',
-          partMatDescription: '',
-          partsQuantity: '',
-          productionBatchCode: '',
-          requestTime: '',
-        },
-      ],
+      id: '',
+      partMatCode: '',
+      partMatDescription: '',
+      partsQuantity: '',
+      productionBatchCode: '',
+      createdTime: '',
+
       currentPage: 1,
       pageSize: 10,
     }
@@ -279,8 +269,19 @@ export default {
         IssueTaskId: this.id,
       }
       process_info(param).then((res) => {
-        this.process_infoData = res.data.items
-        this.getTask_sets()
+        if (res.name == '') {
+          this.process_infoData = res.data.items
+
+          this.id = res.data.items[0].id
+          this.partMatCode = res.data.items[0].partMatCode
+          this.partMatDescription = res.data.items[0].partMatDescription
+          this.partsQuantity = res.data.items[0].partsQuantity
+          this.productionBatchCode = res.data.items[0].productionBatchCode
+          this.createdTime = dateUtil.fullFormatter(
+            new Date(res.data.items[0].created)
+          )
+          this.getTask_sets()
+        }
       })
     },
     getTask_sets_search() {
@@ -297,8 +298,10 @@ export default {
         createEnd: dateUtil.dateValue(this.value1[1]),
       }
       task_sets(param).then((res) => {
-        this.tableData = res.data.items
-        this.total = res.data.itemCount
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
       })
     },
     handleSizeChange(val) {
