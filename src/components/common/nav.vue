@@ -62,13 +62,13 @@ export default {
   },
   methods: {
     pointClick() {
-      this.$notify({
-        title: '提示',
-        type: 'success',
-        message: '可以上线',
-        position: 'bottom-right',
-        duration: '5000',
-      })
+      // this.$notify({
+      //   title: '提示',
+      //   type: 'success',
+      //   message: '可以上线',
+      //   position: 'bottom-right',
+      //   duration: '5000',
+      // })
       this.$router.push('/punchClock')
     },
   },

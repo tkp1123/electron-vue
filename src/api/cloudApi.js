@@ -47,3 +47,18 @@ export function abnormal_parts(params) {
 export function abnormal_parts_parts(params) {
     return http.get(`${resquest}/api/siemens/abnormal-parts/parts`, params)
 }
+
+//签到打卡   查询用户列表
+export function api_users_all() {
+    return http.get(`${resquest}/api/users/all`)
+}
+
+//签到打卡, 获取用户记录分页查询   /api/users/user-log
+export function api_users_user_log(params) {
+    return http.get(`${resquest}/api/users/user-log`, params)
+}
+
+//签到打卡 修改用户状态 /api/users/updateUserStatus/{id}
+export function user_updateUserStatus(param) {
+    return http.post(`${resquest}/api/users/updateUserStatus/${param}`)
+}

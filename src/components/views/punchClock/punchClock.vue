@@ -7,19 +7,30 @@
             <el-col :span="18" :xs="24">
               <el-row>
                 <el-col :span="7">
-                  <el-select v-model="name" placeholder="请选择用户名称">
-                    <el-option label="aa" value="1"></el-option>
-                    <el-option label="bb" value="2"></el-option>
-                    <el-option label="cc" value="3"></el-option>
-                    <el-option label="dd" value="4"></el-option>
-                    <el-option label="ee" value="5"></el-option>
-                    <el-option label="ff" value="6"></el-option>
+                  <el-select
+                    v-model="name"
+                    filterable
+                    @change="changeItem"
+                    placeholder="请选择用户名称"
+                  >
+                    <el-option
+                      v-for="item in userList"
+                      :key="item.id"
+                      :label="item.userName"
+                      :value="item.userName"
+                    >
+                    </el-option>
                   </el-select>
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :span="6" :xs="24" class="text-right">
-              <el-button type="primary">上班打卡 / 下班打卡</el-button>
+            <el-col
+              :span="6"
+              :xs="24"
+              class="text-right"
+              @click.native="changeStatus"
+            >
+              <el-button type="primary">{{ signStatus }}</el-button>
             </el-col>
           </el-row>
         </el-card>
@@ -32,20 +43,27 @@
           style="width: 100%"
           :header-cell-style="{ 'text-align': 'center' }"
         >
+          <el-table-column prop="userName" label="用户名"></el-table-column>
           <el-table-column
-            prop="RequestCode"
-            label="打卡记录"
+            prop="statusDate"
+            label="打卡时间"
+            :formatter="formatDate"
+          ></el-table-column>
+          <el-table-column
+            prop="userStatus"
+            label="打卡状态"
+            :formatter="formatStatus"
           ></el-table-column>
         </el-table>
         <el-row>
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="1"
+            :current-page="currentPage"
             :page-sizes="[10, 20, 30]"
-            :page-size="10"
+            :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="6"
+            :total="total"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -53,69 +71,125 @@
   </div>
 </template>
 <script>
+import {
+  api_users_all,
+  api_users_user_log,
+  user_updateUserStatus,
+} from '@/api/cloudApi'
+import { dateUtil } from '../../../common/dateUtil'
 export default {
   //签到
   name: 'punchClock',
   data() {
     return {
       name: '',
-      tableData: [
-        {
-          RequestCode: '2021.04.15 18:21 AA 下班打卡',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: '2021.04.15 14:21 AA 上班打卡',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: '2021.04.14 18:21 AA 下班打卡',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: '2021.04.14 14:21 AA 上班打卡',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: '2021.04.13 18:21 AA 下班打卡',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: '2021.04.13 14:21 AA 上班打卡',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-      ],
+      signStatus: '上班打卡 / 下班打卡',
+      userList: [],
+      tableData: [],
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
     }
   },
+  mounted() {
+    this.get_api_users_all()
+  },
   methods: {
-    handleSizeChange(val) {},
-    handleCurrentChange(val) {},
-    dialogCancel() {
-      this.$router.push('/basic')
+    get_api_users_all() {
+      api_users_all().then((result) => {
+        console.log(result)
+        if (result.name == '') {
+          this.userList = result.data
+        }
+      })
     },
-    dialogOk() {
-      this.dialogVisible = false
+    get_api_users_user_log(val) {
+      let param = {
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+        sortDirection: 'DESC',
+        userName: val,
+      }
+      api_users_user_log(param).then((res) => {
+        console.log(res)
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
+      })
     },
-    handleClose(done) {
-      return
+    handleSizeChange(val) {
+      this.pageSize = val
+      console.log(`每页 ${val} 条`)
+      this.currentPage = 1
+      this.get_api_users_user_log(this.name)
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`当前页: ${val}`)
+      this.get_api_users_user_log(this.name)
+    },
+    changeItem(val) {
+      this.get_api_users_user_log(val)
+      let param = ''
+      for (let x = 0; x < this.userList.length; x++) {
+        if (val == this.userList[x].userName) {
+          param = this.userList[x].userStatus
+        }
+      }
+      switch (param) {
+        case 'OFFLINE':
+          this.signStatus = '上班打卡'
+          break
+        case 'ONLINE':
+          this.signStatus = '下班打卡'
+          break
+        default:
+          this.signStatus = '上班打卡 / 下班打卡'
+          break
+      }
+    },
+    formatDate(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
+    },
+    formatStatus(row, column, cellValue) {
+      console.log(cellValue)
+      if (!cellValue) return ''
+      if (cellValue == 'OFFLINE') {
+        return '下班打卡'
+      }
+      if (cellValue == 'ONLINE') {
+        return '上班打卡'
+      }
+    },
+    changeStatus() {
+      let param = ''
+      for (let x = 0; x < this.userList.length; x++) {
+        if (this.name == this.userList[x].userName) {
+          param = this.userList[x].id
+        }
+      }
+      console.log(param)
+      user_updateUserStatus(param).then((res) => {
+        if (res.name == '') {
+          this.$notify({
+            title: '提示',
+            type: 'success',
+            message: '打卡成功',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+        } else {
+          this.$notify({
+            title: '提示',
+            type: 'error',
+            message: '打卡失败',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+        }
+      })
     },
   },
 }
