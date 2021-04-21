@@ -23,7 +23,6 @@ export function mes_info_parameterName(param) {
 }
 //mes接口修改 /api/mes-info
 export function mes_info_upgrade(param, data) {
-    console.log(data)
     return http.put(`${resquest}/api/mes-info/${param.id}`, qs.stringify(data))
 }
 //根据部件顺序号获取全部任务信息    贴皮工序

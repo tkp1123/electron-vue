@@ -309,13 +309,11 @@ export default {
     },
     handleSizeChange(val) {
       this.pageSize = val
-      console.log(`每页 ${val} 条`)
       this.currentPage = 1
       this.getIssue_task()
     },
     handleCurrentChange(val) {
       this.currentPage = val
-      console.log(`当前页: ${val}`)
       this.getIssue_task()
     },
     handleDetail(index, row) {
@@ -325,8 +323,6 @@ export default {
       })
     },
     formatDate(row, column, cellValue) {
-      console.log(row)
-      console.log(column)
       if (!cellValue) return ''
       return dateUtil.fullFormatter(new Date(cellValue))
     },

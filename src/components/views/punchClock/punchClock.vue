@@ -97,7 +97,6 @@ export default {
   methods: {
     get_api_users_all() {
       api_users_all().then((result) => {
-        console.log(result)
         if (result.name == '') {
           this.userList = result.data
         }
@@ -111,7 +110,6 @@ export default {
         userName: val,
       }
       api_users_user_log(param).then((res) => {
-        console.log(res)
         if (res.name == '') {
           this.tableData = res.data.items
           this.total = res.data.itemCount
@@ -120,13 +118,11 @@ export default {
     },
     handleSizeChange(val) {
       this.pageSize = val
-      console.log(`每页 ${val} 条`)
       this.currentPage = 1
       this.get_api_users_user_log(this.name)
     },
     handleCurrentChange(val) {
       this.currentPage = val
-      console.log(`当前页: ${val}`)
       this.get_api_users_user_log(this.name)
     },
     changeItem(val) {
@@ -154,7 +150,6 @@ export default {
       return dateUtil.fullFormatter(new Date(cellValue))
     },
     formatStatus(row, column, cellValue) {
-      console.log(cellValue)
       if (!cellValue) return ''
       if (cellValue == 'OFFLINE') {
         return '下班打卡'
@@ -170,7 +165,6 @@ export default {
           param = this.userList[x].id
         }
       }
-      console.log(param)
       user_updateUserStatus(param).then((res) => {
         if (res.name == '') {
           this.$notify({

@@ -170,15 +170,11 @@ export default {
   methods: {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
-    },
+    handleRemove(file, fileList) {},
     handleDetail(index, row) {
       this.$router.push('/workOrderDetail')
     },
-    handlePreview(file) {
-      console.log(file)
-    },
+    handlePreview(file) {},
     handleExceed(files, fileList) {
       this.$message.warning(
         `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${

@@ -110,13 +110,11 @@ export default {
     },
     handleSizeChange(val) {
       this.pageSize = val
-      console.log(`每页 ${val} 条`)
       this.currentPage = 1
       this.get_abnormal_parts()
     },
     handleCurrentChange(val) {
       this.currentPage = val
-      console.log(`当前页: ${val}`)
       this.get_abnormal_parts()
     },
     abnormal_parts_search() {

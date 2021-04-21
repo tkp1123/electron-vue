@@ -39,7 +39,6 @@ const http = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
             }
         }
-        console.log(params)
         return request(config)
     },
 }

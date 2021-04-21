@@ -144,12 +144,10 @@ export default {
     },
     handleSizeChange(val) {
       this.pageSize = val
-      console.log(`每页 ${val} 条`)
       this.currentPage = 1
     },
     handleCurrentChange(val) {
       this.currentPage = val
-      console.log(`当前页: ${val}`)
     },
     editList(index, row) {
       this.formEdit.id = row.id

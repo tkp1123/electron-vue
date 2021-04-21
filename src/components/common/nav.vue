@@ -57,18 +57,9 @@ export default {
   created() {
     this.menuList = jsonNav.menuList
   },
-  mounted() {
-    //console.log(JSON.parse(this.$store.state.user.navList));
-  },
+
   methods: {
     pointClick() {
-      // this.$notify({
-      //   title: '提示',
-      //   type: 'success',
-      //   message: '可以上线',
-      //   position: 'bottom-right',
-      //   duration: '5000',
-      // })
       this.$router.push('/punchClock')
     },
   },
