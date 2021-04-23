@@ -7,7 +7,7 @@
             <el-row>
               <el-col :span="20" :xs="24">
                 <el-row>
-                  <el-col :span="14">
+                  <el-col :span="14" style="text-align: left">
                     <el-row :gutter="10">
                       <el-col
                         :span="6"
@@ -16,7 +16,7 @@
                       >
                       <el-col :span="18">
                         <el-input
-                          v-model="queryInfo"
+                          v-model="palletCode"
                           clearable
                           placeholder="请输入托盘号/生产条码号"
                         >
@@ -24,11 +24,6 @@
                       </el-col>
                     </el-row>
                   </el-col>
-                  <el-col
-                    :span="10"
-                    style="text-align: center; line-height: 40px"
-                    >下线口 ：{{ EXIT_CODE.parameterData }}</el-col
-                  >
                 </el-row>
               </el-col>
               <el-col :span="4" :xs="24" class="text-center">
@@ -41,10 +36,7 @@
         </el-row>
         <el-row>
           <el-table :data="tableData" border stripe style="width: 100%">
-            <el-table-column
-              prop="OperationShortName"
-              label="顺序号"
-            ></el-table-column>
+            <el-table-column prop="sequence" label="顺序号"></el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
                 <el-button
@@ -62,41 +54,81 @@
   </div>
 </template>
 <script>
-import { mes_info_parameterName, bing_pallet } from '@/api/cloudApi'
+import { bing_pallet } from '@/api/cloudApi'
 export default {
   //托盘绑定
   name: 'bindTray',
   data() {
     return {
-      queryInfo: '',
+      palletCode: '',
       EXIT_CODE: '',
       tableData: [],
+      PartSerialNumber: [],
     }
   },
+
   mounted() {
-    this.getMes_info_parameterName()
+    let str = ''
+    let vm = this
+    document.onkeydown = function () {
+      if (event.keyCode !== 13) {
+        let k = event.key
+        if (k !== 'Shift') {
+          str += k
+        }
+      } else {
+        let arr = str.split('@')
+        if (arr[0] == 'QRPART') {
+          vm.palletCode = arr[1]
+          vm.dealData(arr[1])
+        } else if (arr[0] == 'QRTOLT') {
+          vm.palletCode = arr[1]
+        } else {
+          vm.palletCode = arr[1]
+          vm.$notify({
+            title: '提示',
+            type: 'error',
+            message: '请扫描部件序列号码',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+        }
+        str = ''
+        arr = []
+      }
+    }
   },
   methods: {
-    getMes_info_parameterName() {
-      let param = {
-        parameterName: 'EXIT_CODE',
-      }
-      mes_info_parameterName(param).then((res) => {
-        if (res.name == '') {
-          this.EXIT_CODE = res.data
-        }
-      })
-    },
     bing_pallet_submit() {
-      let param = {
-        ExitCode: this.EXIT_CODE.parameterData,
-        //录入的托盘号
-        PalletCode: this.queryInfo,
-        //顺序号集合
-        SequenceNumber: [],
+      if (this.palletCode == '') {
+        this.$notify({
+          title: '提示',
+          type: 'error',
+          message: '未扫描托盘号',
+          position: 'bottom-right',
+          duration: '5000',
+        })
+        return
       }
-      bing_pallet(param).then((res) => {
+      if (this.PartSerialNumber.length == 0) {
+        this.$notify({
+          title: '提示',
+          type: 'error',
+          message: '未扫描生产条码号',
+          position: 'bottom-right',
+          duration: '5000',
+        })
+        return
+      }
+      bing_pallet(
+        { PartSerialNumber: this.PartSerialNumber },
+        {
+          PalletCode: this.palletCode,
+        }
+      ).then((res) => {
         if (res.name == '') {
+          this.tableData = []
+          this.PartSerialNumber = []
           this.$notify({
             title: '提示',
             type: 'success',
@@ -108,14 +140,40 @@ export default {
           this.$notify({
             title: '提示',
             type: 'error',
-            message: '操作失败',
+            message: res.message,
             position: 'bottom-right',
             duration: '5000',
           })
         }
       })
     },
-    handleCancel(index, row) {},
+    handleCancel(index, row) {
+      this.tableData.splice(index, 1)
+      this.PartSerialNumber.splice(index, 1)
+    },
+    dealData(val) {
+      let flag = false
+      for (let x = 0; x < this.tableData.length; x++) {
+        if (val == this.tableData[x].sequence) {
+          flag = true
+        }
+      }
+      if (flag == false || this.tableData.length == 0) {
+        let data = val.split('MB')
+        if (!data) {
+          this.$notify({
+            title: '提示',
+            type: 'error',
+            message: '扫码错误',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+          return
+        }
+        this.PartSerialNumber.push(data[1])
+        this.tableData.push({ sequence: val })
+      }
+    },
   },
 }
 </script>
@@ -126,6 +184,9 @@ export default {
 }
 .el-pagination {
   padding-top: 20px;
+}
+.el-row {
+  margin: 0 !important;
 }
 .text-right {
   text-align: right;

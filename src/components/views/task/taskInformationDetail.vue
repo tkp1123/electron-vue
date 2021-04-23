@@ -92,7 +92,7 @@
                   :xs="24"
                 >
                   <el-input
-                    v-model="queryInfo"
+                    v-model="taskSequenceNumber"
                     clearable
                     placeholder="请输入任务单序号"
                   >
@@ -108,7 +108,7 @@
                   :xs="24"
                 >
                   <el-input
-                    v-model="queryInfo"
+                    v-model="taskNumber"
                     clearable
                     placeholder="请输入生产任务单号"
                   >
@@ -123,10 +123,10 @@
                   :sm="12"
                   :xs="24"
                 >
-                  <el-select v-model="State" placeholder="请选择完成状态">
-                    <el-option label="已完成" value="1"> </el-option>
-                    <el-option label="进行中" value="2"> </el-option>
-                    <el-option label="未执行" value="3"> </el-option>
+                  <el-select v-model="taskStatus" placeholder="请选择完成状态">
+                    <el-option label="已完成" value="COMPLETE"> </el-option>
+                    <el-option label="进行中" value="PROCESSING"> </el-option>
+                    <el-option label="未执行" value="INITIAL"> </el-option>
                   </el-select>
                 </el-col>
                 <el-col
@@ -149,9 +149,14 @@
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :span="4" :xs="24" class="text-right">
+            <el-col :span="2" :xs="24" class="text-right">
               <el-button type="primary" @click="getTask_sets_search()"
                 >查询</el-button
+              >
+            </el-col>
+            <el-col :span="2" :xs="24" class="text-right">
+              <el-button type="primary" @click="getTask_sets_reset()"
+                >重置</el-button
               >
             </el-col>
           </el-row>
@@ -195,25 +200,19 @@
               label="门扇款式"
             ></el-table-column>
             <el-table-column prop="color" label="颜色"></el-table-column>
+            <el-table-column prop="taskStatus" label="完成状态">
+              <template slot-scope="scope">
+                <span v-if="scope.row.taskStatus == 'INITIAL'">未执行</span>
+                <span v-else-if="scope.row.taskStatus == 'PROCESSING'"
+                  >进行中</span
+                >
+                <span v-else>已完成</span>
+              </template>
+            </el-table-column>
             <el-table-column
-              prop="MaterialQuantity"
-              label="部件顺序号"
-            ></el-table-column>
-            <el-table-column
-              prop="MaterialQuantity"
-              label="部件唯一码"
-            ></el-table-column>
-            <el-table-column
-              prop="MaterialQuantity"
-              label="完成情况"
-            ></el-table-column>
-            <el-table-column
-              prop="MaterialQuantity"
-              label="完成状态"
-            ></el-table-column>
-            <el-table-column
-              prop="MaterialQuantity"
+              prop="updated"
               label="完成时间"
+              :formatter="formatUpdated"
             ></el-table-column>
           </el-table>
           <el-row>
@@ -242,9 +241,10 @@ export default {
     return {
       id: this.$route.query.id,
       tableData: [],
-      queryInfo: '',
+      taskSequenceNumber: '',
+      taskNumber: '',
       value1: '',
-      State: '',
+      taskStatus: '',
       total: 0,
       id: '',
       partMatCode: '',
@@ -252,7 +252,6 @@ export default {
       partsQuantity: '',
       productionBatchCode: '',
       createdTime: '',
-
       currentPage: 1,
       pageSize: 10,
     }
@@ -288,11 +287,22 @@ export default {
       this.currentPage = 1
       this.getTask_sets()
     },
+    getTask_sets_reset() {
+      this.currentPage = 1
+      this.taskSequenceNumber = ''
+      this.taskNumber = ''
+      this.taskStatus = ''
+      this.value1 = ''
+      this.getTask_sets()
+    },
     getTask_sets() {
       let param = {
         pageIndex: this.currentPage,
         pageSize: this.pageSize,
         sortDirection: 'DESC',
+        TaskSequenceNumber: this.taskSequenceNumber,
+        TaskNumber: this.taskNumber,
+        taskStatus: this.taskStatus,
         ProcessInfoId: this.process_infoData[0].id,
         createBegin: dateUtil.dateValue(this.value1[0]),
         createEnd: dateUtil.dateValue(this.value1[1]),
@@ -312,6 +322,10 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val
       this.getTask_sets()
+    },
+    formatUpdated(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
     },
     goBack() {
       this.$router.push('/taskInformation')

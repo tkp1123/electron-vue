@@ -174,6 +174,7 @@ export default {
             position: 'bottom-right',
             duration: '5000',
           })
+          this.get_api_users_user_log(this.name)
         } else {
           this.$notify({
             title: '提示',

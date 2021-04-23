@@ -20,7 +20,7 @@
                     :lg="12"
                     :xl="12"
                     class="panel-content-title"
-                    >批次总数 :xxx</el-col
+                    >批次总数 :{{ taskDataCount.batchNumber }}</el-col
                   >
                   <el-col
                     :span="12"
@@ -30,29 +30,9 @@
                     :lg="12"
                     :xl="12"
                     class="panel-content-title"
-                    >已完成批次总次数 :xxx</el-col
-                  >
-                </el-row>
-                <el-row>
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
-                    >任务总数 :xxx</el-col
-                  >
-                  <el-col
-                    :span="12"
-                    :xs="24"
-                    :sm="24"
-                    :md="24"
-                    :lg="12"
-                    :xl="12"
-                    class="panel-content-title"
-                    >已完成任务总次数 :xxx</el-col
+                    >已完成批次总次数 :{{
+                      taskDataCount.completeBatchNumber
+                    }}</el-col
                   >
                 </el-row>
                 <el-row>
@@ -64,7 +44,7 @@
                     :lg="12"
                     :xl="12"
                     class="panel-content-title"
-                    >板件总数:xxx</el-col
+                    >任务总数 :{{ taskDataCount.taskNumber }}</el-col
                   >
                   <el-col
                     :span="12"
@@ -74,7 +54,33 @@
                     :lg="12"
                     :xl="12"
                     class="panel-content-title"
-                    >已完成板件总数:xxx</el-col
+                    >已完成任务总次数 :{{
+                      taskDataCount.taskCompleteNumber
+                    }}</el-col
+                  >
+                </el-row>
+                <el-row>
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >板件总数 :{{ taskDataCount.partNumber }}</el-col
+                  >
+                  <el-col
+                    :span="12"
+                    :xs="24"
+                    :sm="24"
+                    :md="24"
+                    :lg="12"
+                    :xl="12"
+                    class="panel-content-title"
+                    >已完成板件总数 :{{
+                      taskDataCount.partCompleteNumber
+                    }}</el-col
                   >
                 </el-row>
               </el-col>
@@ -92,13 +98,13 @@
                   class="col-padd"
                   :span="6"
                   :xl="6"
-                  :lg="8"
+                  :lg="12"
                   :md="12"
                   :sm="12"
                   :xs="24"
                 >
                   <el-input
-                    v-model="queryInfo"
+                    v-model="productionBatchCode"
                     clearable
                     placeholder="请输入生产批次号"
                   >
@@ -106,58 +112,47 @@
                 </el-col>
                 <el-col
                   class="col-padd"
-                  :span="4"
-                  :xl="4"
-                  :lg="8"
+                  :span="6"
+                  :xl="6"
+                  :lg="12"
                   :md="12"
                   :sm="12"
                   :xs="24"
                 >
-                  <el-select
-                    v-model="NOKQuantity"
-                    placeholder="请选择不良品数量排序"
-                  >
-                    <el-option label="由高到低" value="1"> </el-option>
-                    <el-option label="由低到高" value="2"> </el-option>
-                  </el-select>
-                </el-col>
-                <el-col
-                  class="col-padd"
-                  :span="4"
-                  :xl="4"
-                  :lg="8"
-                  :md="12"
-                  :sm="12"
-                  :xs="24"
-                >
-                  <el-select
-                    v-model="ScrappedQuantity"
-                    placeholder="请选择报废品数量排序"
-                  >
-                    <el-option label="由高到低" value="1"> </el-option>
-                    <el-option label="由低到高" value="2"> </el-option>
-                  </el-select>
-                </el-col>
-                <el-col
-                  class="col-padd"
-                  :span="4"
-                  :xl="4"
-                  :lg="8"
-                  :md="12"
-                  :sm="12"
-                  :xs="24"
-                >
-                  <el-select v-model="State" placeholder="请选择完成状态">
-                    <el-option label="已完成" value="1"> </el-option>
-                    <el-option label="进行中" value="2"> </el-option>
-                    <el-option label="未执行" value="3"> </el-option>
+                  <el-select v-model="orderBy" placeholder="请选择排序">
+                    <el-option label="不良品由高到低" value="nokQuantityDESC">
+                    </el-option>
+                    <el-option label="不良品由低到高" value="nokQuantityASC">
+                    </el-option>
+                    <el-option
+                      label="报废由高到低"
+                      value="scrappedQuantityDESC"
+                    >
+                    </el-option>
+                    <el-option label="报废由低到高" value="scrappedQuantityASC">
+                    </el-option>
                   </el-select>
                 </el-col>
                 <el-col
                   class="col-padd"
                   :span="6"
                   :xl="6"
-                  :lg="8"
+                  :lg="12"
+                  :md="12"
+                  :sm="12"
+                  :xs="24"
+                >
+                  <el-select v-model="taskStatus" placeholder="请选择完成状态">
+                    <el-option label="已完成" value="COMPLETE"> </el-option>
+                    <el-option label="进行中" value="PROCESSING"> </el-option>
+                    <el-option label="未执行" value="INITIAL"> </el-option>
+                  </el-select>
+                </el-col>
+                <el-col
+                  class="col-padd"
+                  :span="6"
+                  :xl="6"
+                  :lg="12"
                   :md="12"
                   :sm="12"
                   :xs="24"
@@ -197,15 +192,15 @@
             label="工序短名称"
           ></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="partMatCode"
             label="产出物料的物料编码"
           ></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="partMatDescription"
             label="产出物料的物料名称或描述"
           ></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="productionBatchCode"
             label="生产批次号"
           ></el-table-column>
           <el-table-column
@@ -214,25 +209,44 @@
             :formatter="formatDate"
           ></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="nokQuantity"
             label="不良品数量"
           ></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="scrappedQuantity"
             label="报废品数量"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="总任务数"></el-table-column>
+          <el-table-column prop="taskNumber" label="总任务数"></el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="completeNumber"
             label="已完成任务数"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="完成状态"></el-table-column>
+          <el-table-column prop="taskStatus" label="完成状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.taskStatus == 'INITIAL'">未执行</span>
+              <span v-else-if="scope.row.taskStatus == 'PROCESSING'"
+                >进行中</span
+              >
+              <span v-else>已完成</span>
+            </template>
+          </el-table-column>
           <el-table-column
-            prop="EventCode"
+            prop="updated"
             label="任务完成时间"
+            :formatter="formatUpdated"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="是否报工"></el-table-column>
-          <el-table-column prop="SourceInfo" label="数据来源"></el-table-column>
+          <el-table-column prop="reportWork" label="是否报工">
+            <template slot-scope="scope">
+              <span v-if="scope.row.reportWork == true">是</span>
+              <span v-else>否</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="dataSource" label="数据来源">
+            <template slot-scope="scope">
+              <span v-if="scope.row.dataSource == '1'">MES</span>
+              <span v-else>自建工单</span>
+            </template>
+          </el-table-column>
           <el-table-column label="工艺信息">
             <template slot-scope="scope">
               <el-button
@@ -259,26 +273,29 @@
   </div>
 </template>
 <script>
-import { issue_task } from '@/api/cloudApi'
+import { task_data_count, process_info } from '@/api/cloudApi'
 import { dateUtil } from '../../../common/dateUtil'
 export default {
   //任务和工艺信息
   name: 'taskInformation',
   data() {
     return {
-      queryInfo: '',
-      NOKQuantity: '',
-      ScrappedQuantity: '',
-      State: '',
+      productionBatchCode: '',
+      orderBy: '',
+      taskStatus: '',
       total: 0,
       currentPage: 1,
       pageSize: 10,
       value1: '',
+      taskDataCount: '',
       tableData: [],
+      taskNumber: [],
+      issueTask: [],
     }
   },
   mounted() {
     this.getIssue_task()
+    this.get_task_data_count()
   },
   methods: {
     getIssue_task() {
@@ -286,16 +303,82 @@ export default {
         pageIndex: this.currentPage,
         pageSize: this.pageSize,
         sortDirection: 'DESC',
-        LineCode: '',
-        operationCode: '',
+        productionBatchCode: '',
+        sortProperties: '',
+        taskStatus: this.taskStatus,
         createBegin: dateUtil.dateValue(this.value1[0]),
         createEnd: dateUtil.dateValue(this.value1[1]),
       }
-      issue_task(param).then((res) => {
+      switch (this.orderBy) {
+        case 'nokQuantityASC':
+          param.sortProperties = 'nokQuantity'
+          param.sortDirection = 'ASC'
+          break
+        case 'nokQuantityDESC':
+          param.sortProperties = 'nokQuantity'
+          param.sortDirection = 'DESC'
+          break
+        case 'scrappedQuantityASC':
+          param.sortProperties = 'scrappedQuantity'
+          param.sortDirection = 'ASC'
+          break
+        case 'scrappedQuantityDESC':
+          param.sortProperties = 'scrappedQuantity'
+          param.sortDirection = 'DESC'
+          break
+      }
+      process_info(param).then((res) => {
+        console.log(res)
         if (res.name == '') {
           this.tableData = res.data.items
           this.total = res.data.itemCount
+          if (res.data.extras.length > 0) {
+            if (res.data.extras[0].taskNumber) {
+              this.taskNumber = res.data.extras[0].taskNumber
+              if (this.taskNumber.length > 0) {
+                for (let x = 0; x < this.tableData.length; x++) {
+                  for (let y = 0; y < this.taskNumber.length; y++) {
+                    if (this.tableData[x].id == this.taskNumber[y].id) {
+                      this.tableData[x].taskNumber = this.taskNumber[
+                        y
+                      ].taskNumber
+                      this.tableData[x].completeNumber = this.taskNumber[
+                        y
+                      ].completeNumber
+                    }
+                  }
+                }
+              }
+            }
+            if (res.data.extras[0].issueTask) {
+              this.issueTask = res.data.extras[0].issueTask
+              if (this.issueTask.length > 0) {
+                for (let x = 0; x < this.tableData.length; x++) {
+                  for (let y = 0; y < this.issueTask.length; y++) {
+                    if (this.tableData[x].issueTaskId == this.issueTask[y].id) {
+                      this.tableData[x].requestCode = this.issueTask[
+                        y
+                      ].requestCode
+                      this.tableData[x].lineCode = this.issueTask[y].lineCode
+                      this.tableData[x].operationCode = this.issueTask[
+                        y
+                      ].operationCode
+                      this.tableData[x].operationShortName = this.issueTask[
+                        y
+                      ].operationShortName
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
+      })
+    },
+    get_task_data_count() {
+      task_data_count().then((res) => {
+        console.log(res)
+        this.taskDataCount = res.data
       })
     },
     getIssue_task_search() {
@@ -319,10 +402,14 @@ export default {
     handleDetail(index, row) {
       this.$router.push({
         path: '/taskInformationDetail',
-        query: { id: row.id },
+        query: { id: row.issueTaskId },
       })
     },
     formatDate(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
+    },
+    formatUpdated(row, column, cellValue) {
       if (!cellValue) return ''
       return dateUtil.fullFormatter(new Date(cellValue))
     },

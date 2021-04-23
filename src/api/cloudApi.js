@@ -6,6 +6,10 @@ let resquest = "http://192.168.2.25:11205"
 export function issue_task(params) {
     return http.get(`${resquest}/api/siemens/issue-task`, params)
 }
+//MES任务需求单分页查询 获取信息总览
+export function task_data_count() {
+    return http.get(`${resquest}/api/siemens/task-data-count`)
+}
 //process-info 工艺信息分页查询   /api/siemens/process-info
 export function process_info(params) {
     return http.get(`${resquest}/api/siemens/process-info`, params)
@@ -30,13 +34,13 @@ export function siemens_task_all(params) {
     return http.get(`${resquest}/api/siemens/task-all/${params}`)
 }
 //托盘绑定    MES提供给产线上位机调用的产品与托盘绑定信息的接口
-export function bing_pallet(params) {
-    return http.post(`${resquest}/api/siemens-interaction/bing-pallet`, params)
+export function bing_pallet(params, data) {
+    return http.post(`${resquest}/api/siemens-interaction/bing-pallet?${qs.stringify(params, { indices: false })}`, qs.stringify(data))
 }
 //异常产品提报
 //1.MES提供给产线上位机调用的不良品反馈信息接口  /api/siemens-interaction/ng-report
-export function interaction_ng_report(params) {
-    return http.post(`${resquest}/api/siemens-interaction/ng-report`, params)
+export function interaction_ng_report(params, data) {
+    return http.post(`${resquest}/api/siemens-interaction/ng-report?${qs.stringify(params, { indices: false })}`, qs.stringify(data))
 }
 //2.异常产品提报分页查询 /api/siemens/abnormal-parts
 export function abnormal_parts(params) {
@@ -60,4 +64,25 @@ export function api_users_user_log(params) {
 //签到打卡 修改用户状态 /api/users/updateUserStatus/{id}
 export function user_updateUserStatus(param) {
     return http.post(`${resquest}/api/users/updateUserStatus/${param}`)
+}
+
+//托盘上线  MES提供给产线上位机调用的托盘上线数据请求接口 /api/siemens-interaction/pallet-entry
+export function pallet_entry(params) {
+    return http.post(`${resquest}/api/siemens-interaction/pallet-entry`, qs.stringify(params))
+}
+
+
+//获取MES任务总览  mes 任务 /api/siemens/first-task
+export function first_task() {
+    return http.get(`${resquest}/api/siemens/first-task`)
+}
+
+//part-sets 任务单部件分页查询  mes任务列表  /api/siemens/part-sets
+export function part_sets(params) {
+    return http.get(`${resquest}/api/siemens/part-sets`, params)
+}
+
+//MES提供给产线上位机调用的批次工艺请求接口     mes任务批次获取 /api/siemens-interaction/ask-task
+export function ask_task(params) {
+    return http.post(`${resquest}/api/siemens-interaction/ask-task`, qs.stringify(params))
 }

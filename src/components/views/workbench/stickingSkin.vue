@@ -9,7 +9,7 @@
                 <el-input
                   v-model="sequenceNumber"
                   clearable
-                  placeholder="请输入序号"
+                  placeholder="请扫码输入序号"
                 >
                 </el-input>
               </el-col>
@@ -114,22 +114,79 @@ export default {
     }
   },
   mounted() {
-    this.getSiemens_task_all()
+    let str = ''
+    let vm = this
+    document.onkeydown = function () {
+      if (event.keyCode !== 13) {
+        let k = event.key
+        if (k !== 'Shift') {
+          str += k
+        }
+      } else {
+        let arr = str.split('@')
+        if (arr[0] == 'QRPART') {
+          vm.sequenceNumber = arr[1]
+          vm.getSiemens_task_all()
+        } else if (arr[0] == 'QRTOLT') {
+          vm.sequenceNumber = arr[1]
+          vm.$notify({
+            title: '提示',
+            type: 'error',
+            message: '请扫描部件序列号码',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+        } else {
+          vm.sequenceNumber = arr[1]
+          vm.$notify({
+            title: '提示',
+            type: 'error',
+            message: '请扫描部件序列号码',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+        }
+        str = ''
+        arr = []
+      }
+    }
   },
   methods: {
     getSiemens_task_all() {
-      siemens_task_all(this.sequenceNumber).then((res) => {
-        if (res.name == '') {
-          this.ProductionBatchCode = res.data.processInfoVo.productionBatchCode
-          this.SequenceNumber =
-            res.data.processInfoVo.taskSetsVos[0].partSetsVos[0].sequenceNumber
-          this.PartSerialNumber =
-            res.data.processInfoVo.taskSetsVos[0].partSetsVos[0].partSerialNumber
-          this.DoorPocket_Style =
-            res.data.processInfoVo.taskSetsVos[0].doorLeafStyle
-          this.Color = res.data.processInfoVo.boardMaterialSetsVos[0].color
+      if (this.sequenceNumber) {
+        let val = this.sequenceNumber.split('MB')
+        if (!val) {
+          this.$notify({
+            title: '提示',
+            type: 'error',
+            message: '扫码错误',
+            position: 'bottom-right',
+            duration: '5000',
+          })
+          return
         }
-      })
+        siemens_task_all(parseInt(val[1])).then((res) => {
+          if (res.name == '') {
+            this.ProductionBatchCode =
+              res.data.processInfoVo.productionBatchCode
+            this.SequenceNumber =
+              res.data.processInfoVo.taskSetsVos[0].partSetsVos[0].sequenceNumber
+            this.PartSerialNumber =
+              res.data.processInfoVo.taskSetsVos[0].partSetsVos[0].partSerialNumber
+            this.DoorPocket_Style =
+              res.data.processInfoVo.taskSetsVos[0].doorLeafStyle
+            this.Color = res.data.processInfoVo.boardMaterialSetsVos[0].color
+          } else {
+            this.$notify({
+              title: '提示',
+              type: 'error',
+              message: res.message,
+              position: 'bottom-right',
+              duration: '5000',
+            })
+          }
+        })
+      }
     },
     search_getSiemens_task_all() {
       this.getSiemens_task_all()
