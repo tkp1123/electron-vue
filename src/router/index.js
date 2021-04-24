@@ -120,6 +120,12 @@ const router = new Router({
           name: 'trayinformation',
           component: resolve => require(['@/components/views/workbench/trayinformation'], resolve)
         },
+        //批次完工信息
+        {
+          path: '/batchFinished',
+          name: 'batchFinished',
+          component: resolve => require(['@/components/views/workbench/batchFinished'], resolve)
+        },
         //托盘上线详情
         // {
         //   path: '/trayinformationDetail',
@@ -133,10 +139,17 @@ const router = new Router({
         //   component: resolve => require(['@/components/views/workbench/trayTemplate/trayinformationHistory'], resolve)
         // },
         //手动页面
+        //主页面 
         {
-          path: '/manual',
-          name: 'manual',
-          component: resolve => require(['@/components/views/manual/manual'], resolve)
+          path: '/manualMain',
+          name: 'manualMain',
+          component: resolve => require(['@/components/views/manual/manualMain'], resolve)
+        },
+        //手动控制
+        {
+          path: '/manualControl',
+          name: 'manualControl',
+          component: resolve => require(['@/components/views/manual/manualControl'], resolve)
         },
         //IO监控
         // {

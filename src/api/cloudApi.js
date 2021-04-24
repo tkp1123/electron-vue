@@ -23,7 +23,7 @@ export function mes_info(params) {
     return http.get(`${resquest}/api/mes-info`, params)
 }
 export function mes_info_parameterName(param) {
-    return http.get(`${resquest}/api/mes-info/parameterName/${param.parameterName}`)
+    return http.get(`${resquest}/api/mes-info/parameterName/${param}`)
 }
 //mes接口修改 /api/mes-info
 export function mes_info_upgrade(param, data) {

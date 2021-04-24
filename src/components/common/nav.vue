@@ -42,7 +42,8 @@
   </el-scrollbar>
 </template>
 <script>
-import jsonNav from '@/api/nav.json'
+import jsonNav029 from '@/api/nav029.json'
+import jsonNav021 from '@/api/nav021.json'
 export default {
   computed: {
     getCollapse() {
@@ -54,10 +55,15 @@ export default {
       menuList: '',
     }
   },
-  created() {
-    this.menuList = jsonNav.menuList
+  mounted() {
+    console.log(this.$store.state.parameterName.parameterName)
+    let parameterName = this.$store.state.parameterName.parameterName
+    if (parameterName != '029') {
+      this.menuList = jsonNav029.menuList
+    } else {
+      this.menuList = jsonNav021.menuList
+    }
   },
-
   methods: {
     pointClick() {
       this.$router.push('/punchClock')

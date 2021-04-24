@@ -61,6 +61,12 @@
                     "autoName": "部件托盘上线",
                     "path": "trayinformation",
                     "children": []
+                },
+                {
+                    "id": "3-7",
+                    "autoName": "批次完工信息",
+                    "path": "batchFinished",
+                    "children": []
                 }
             ]
         },
@@ -68,7 +74,21 @@
             "id": "4",
             "autoName": "手动页面",
             "path": "manual",
-            "icon": "iconfont icon-shoudongtongbu"
+            "icon": "iconfont icon-shoudongtongbu",
+            "children": [
+                {
+                    "id": "4-1",
+                    "autoName": "主页面",
+                    "path": "manualMain",
+                    "children": []
+                },
+                {
+                    "id": "4-2",
+                    "autoName": "手动控制",
+                    "path": "manualControl",
+                    "children": []
+                }
+            ]
         },
         {
             "id": "5",
