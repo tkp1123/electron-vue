@@ -2,7 +2,10 @@
   <div class="contain">
     <el-row style="padding: 10px">
       <el-col :span="12">
-        <el-table
+        <el-col :span="12" style="color: #fff">已完成批次数 : 1</el-col>
+        <el-col :span="12" style="color: #fff">已完成板件数 : 1</el-col>
+      </el-col>
+      <!-- <el-table
           :data="tableData2"
           border
           stripe
@@ -23,8 +26,7 @@
             prop="statusDate"
             label="已完成板件数"
           ></el-table-column>
-        </el-table>
-      </el-col>
+        </el-table> -->
     </el-row>
     <el-row :gutter="20">
       <el-col :span="24">
@@ -205,12 +207,12 @@ export default {
 }
 @keyframes circle1 {
   from {
-    right: 210px;
-    top: 150px;
+    right: 12%;
+    top: 30%;
   }
   to {
-    right: 210px;
-    top: 70px;
+    right: 12%;
+    top: 13%;
   }
 }
 .img-circle2 {
@@ -224,12 +226,12 @@ export default {
 }
 @keyframes circle2 {
   from {
-    right: 210px;
-    top: 70px;
+    right: 12%;
+    top: 13%;
   }
   to {
-    right: 370px;
-    top: 70px;
+    right: 21%;
+    top: 13%;
   }
 }
 .img-circle3 {
@@ -243,12 +245,12 @@ export default {
 }
 @keyframes circle3 {
   from {
-    right: 370px;
-    top: 70px;
+    right: 21%;
+    top: 13%;
   }
   to {
-    right: 525px;
-    top: 70px;
+    right: 30%;
+    top: 13%;
   }
 }
 .img-circle4 {
@@ -262,12 +264,12 @@ export default {
 }
 @keyframes circle4 {
   from {
-    right: 525px;
-    top: 70px;
+    right: 30%;
+    top: 13%;
   }
   to {
-    right: 680px;
-    top: 70px;
+    right: 39%;
+    top: 13%;
   }
 }
 .img-circle5 {
@@ -281,12 +283,12 @@ export default {
 }
 @keyframes circle5 {
   from {
-    right: 680px;
-    top: 70px;
+    right: 39%;
+    top: 13%;
   }
   to {
-    right: 783px;
-    top: 70px;
+    right: 45%;
+    top: 13%;
   }
 }
 .img-circle6 {
@@ -300,12 +302,12 @@ export default {
 }
 @keyframes circle6 {
   from {
-    right: 783px;
-    top: 70px;
+    right: 45%;
+    top: 13%;
   }
   to {
-    right: 880px;
-    top: 70px;
+    right: 51%;
+    top: 13%;
   }
 }
 .img-circle7 {
@@ -319,12 +321,12 @@ export default {
 }
 @keyframes circle7 {
   from {
-    right: 880px;
-    top: 70px;
+    right: 51%;
+    top: 13%;
   }
   to {
-    right: 995px;
-    top: 70px;
+    right: 58%;
+    top: 13%;
   }
 }
 .img-circle8 {
@@ -338,12 +340,12 @@ export default {
 }
 @keyframes circle8 {
   from {
-    right: 995px;
-    top: 70px;
+    right: 58%;
+    top: 13%;
   }
   to {
-    right: 1090px;
-    top: 70px;
+    right: 64%;
+    top: 13%;
   }
 }
 .img-circle9 {
@@ -357,12 +359,12 @@ export default {
 }
 @keyframes circle9 {
   from {
-    right: 1090px;
-    top: 70px;
+    right: 64%;
+    top: 13%;
   }
   to {
-    right: 1270px;
-    top: 70px;
+    right: 74%;
+    top: 13%;
   }
 }
 </style>

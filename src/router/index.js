@@ -235,6 +235,18 @@ const router = new Router({
           name: 'warnning',
           component: resolve => require(['@/components/views/warnning/warnning'], resolve)
         },
+        //操作记录
+        {
+          path: '/operationrecord',
+          name: 'operationrecord',
+          component: resolve => require(['@/components/views/warnning/operationrecord'], resolve)
+        },
+        //进出时间
+        {
+          path: '/InAndOut',
+          name: 'InAndOut',
+          component: resolve => require(['@/components/views/warnning/InAndOut'], resolve)
+        },
         //签到
         {
           path: '/punchClock',

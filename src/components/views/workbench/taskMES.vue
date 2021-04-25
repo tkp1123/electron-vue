@@ -39,18 +39,75 @@
               <el-col :span="4" :xs="24">
                 <el-row>
                   <el-col :span="24">
-                    <el-button type="primary" @click="get_ask_task()"
-                      >批次获取</el-button
-                    ></el-col
-                  >
+                    <el-button type="primary" @click="get_ask_task()">
+                      批次获取
+                    </el-button>
+                  </el-col>
                 </el-row>
               </el-col>
             </el-row>
           </el-card>
         </el-col>
       </el-row>
-      <el-row>
-        <el-table :data="tableData" border stripe style="width: 100%">
+      <el-row v-if="parameterName != '029'">
+        <el-table :data="tableData_029" border stripe style="width: 100%">
+          <el-table-column
+            prop="MatSequenceNumber"
+            label="物料序号"
+          ></el-table-column>
+          <el-table-column
+            prop="MaterailCode"
+            label="物料编码"
+          ></el-table-column>
+          <el-table-column
+            prop="MaterialDescription"
+            label="物料描述"
+          ></el-table-column>
+          <el-table-column
+            prop="MeterailQuality"
+            label="材质"
+          ></el-table-column>
+          <el-table-column prop="Color" label="颜色"></el-table-column>
+          <el-table-column prop="Specification" label="规格"></el-table-column>
+          <el-table-column
+            prop="EntranceCode"
+            label="上料口编号"
+          ></el-table-column>
+          <el-table-column
+            prop="MaterialQuantity"
+            label="投入物料数量"
+          ></el-table-column>
+          <el-table-column
+            prop="Completed"
+            label="已加工大板数"
+          ></el-table-column>
+          <el-table-column prop="Size" label="输出物料尺寸"></el-table-column>
+          <el-table-column prop="State" label="完成状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.State == 'UNPROCESSED'">进行中</span>
+              <span v-else-if="scope.row.State == 'ONE_PROCESSING'">
+                未执行
+              </span>
+              <span v-else-if="scope.row.State == 'TWO_PROCESSING'">
+                已完成
+              </span>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange_029"
+            @current-change="handleCurrentChange_029"
+            :current-page="currentPage_029"
+            :page-sizes="[10, 20, 30]"
+            :page-size="pageSize_029"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total_029"
+          ></el-pagination>
+        </el-row>
+      </el-row>
+      <el-row v-else>
+        <el-table :data="tableData_021" border stripe style="width: 100%">
           <el-table-column
             prop="categoryType"
             label="品类类型"
@@ -105,13 +162,13 @@
         </el-table>
         <el-row>
           <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
+            @size-change="handleSizeChange_021"
+            @current-change="handleCurrentChange_021"
+            :current-page="currentPage_021"
             :page-sizes="[10, 20, 30]"
-            :page-size="pageSize"
+            :page-size="pageSize_021"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
+            :total="total_021"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -148,15 +205,23 @@ export default {
       quantity: '',
       taskSequenceNumber: '',
       taskNumber: '',
-      total: 0,
-      currentPage: 1,
-      pageSize: 10,
-      tableData: [],
+      parameterName: '',
+      total_021: 0,
+      currentPage_021: 1,
+      pageSize_021: 10,
+      tableData_021: [],
+      total_029: 0,
+      currentPage_029: 1,
+      pageSize_029: 10,
+      tableData_029: [],
       dialogVisible: false,
       form: {
         TaskNumber: '',
       },
     }
+  },
+  created() {
+    this.parameterName = this.$store.state.parameterName.parameterName
   },
   mounted() {
     this.get_first_task()
@@ -180,33 +245,34 @@ export default {
     get_part_sets(val) {
       let param = {
         tasksId: val,
-        pageIndex: this.currentPage,
-        pageSize: this.pageSize,
+        pageIndex: this.currentPage_021,
+        pageSize: this.pageSize_021,
         sortDirection: 'DESC',
       }
       part_sets(param).then((res) => {
-        console.log(res)
         if (res.name == '') {
-          this.tableData = res.data.items
-          this.total = res.data.itemCount
+          this.tableData_021 = res.data.items
+          this.total_021 = res.data.itemCount
           if (res.data.extras.length > 0) {
             if (res.data.extras[0].task.length > 0) {
               console.log(res.data.extras[0].task[0])
-              for (let x = 0; x < this.tableData.length; x++) {
+              for (let x = 0; x < this.tableData_021.length; x++) {
                 for (let y = 0; y < res.data.extras[0].task.length; y++) {
                   if (
-                    this.tableData[x].tasksId == res.data.extras[0].task[y].id
+                    this.tableData_021[x].tasksId ==
+                    res.data.extras[0].task[y].id
                   ) {
-                    this.tableData[x].color = res.data.extras[0].task[y].color
-                    this.tableData[x].categoryType =
+                    this.tableData_021[x].color =
+                      res.data.extras[0].task[y].color
+                    this.tableData_021[x].categoryType =
                       res.data.extras[0].task[y].categoryType
-                    this.tableData[x].doorLeafHeight =
+                    this.tableData_021[x].doorLeafHeight =
                       res.data.extras[0].task[y].doorLeafHeight
-                    this.tableData[x].doorLeafWidth =
+                    this.tableData_021[x].doorLeafWidth =
                       res.data.extras[0].task[y].doorLeafWidth
-                    this.tableData[x].doorLeafThickness =
+                    this.tableData_021[x].doorLeafThickness =
                       res.data.extras[0].task[y].doorLeafThickness
-                    this.tableData[x].doorLeafStyle =
+                    this.tableData_021[x].doorLeafStyle =
                       res.data.extras[0].task[y].doorLeafStyle
                   }
                 }
@@ -216,13 +282,13 @@ export default {
         }
       })
     },
-    handleSizeChange(val) {
-      this.pageSize = val
-      this.currentPage = 1
+    handleSizeChange_021(val) {
+      this.pageSize_021 = val
+      this.currentPage_021 = 1
       this.get_first_task()
     },
-    handleCurrentChange(val) {
-      this.currentPage = val
+    handleCurrentChange_021(val) {
+      this.currentPage_021 = val
       this.get_first_task()
     },
     get_ask_task() {
@@ -239,6 +305,15 @@ export default {
           this.get_first_task()
         }
       })
+    },
+    handleSizeChange_029(val) {
+      this.pageSize_029 = val
+      this.currentPage_029 = 1
+      this.get_first_task()
+    },
+    handleCurrentChange_029(val) {
+      this.currentPage_029 = val
+      this.get_first_task()
     },
   },
 }

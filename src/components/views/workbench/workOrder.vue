@@ -4,7 +4,7 @@
       <el-row :gutter="20" style="padding: 10px">
         <el-card shadow="never" style="padding: 10px">
           <el-row>
-            <el-col :span="20" :xs="24" :sm="20" :md="20">
+            <el-col :span="16" :xs="24" :sm="20" :md="20">
               <el-row :gutter="20">
                 <el-col
                   class="col-padd"
@@ -48,8 +48,11 @@
                 </el-col>
               </el-row>
             </el-col>
-            <el-col :span="4" :xs="24" :sm="4" :md="4" class="text-right">
+            <el-col :span="2" class="text-right">
               <el-button type="primary" @click="search()">查询</el-button>
+            </el-col>
+            <el-col :span="2" class="text-right">
+              <el-button type="primary" @click="search()">提交</el-button>
             </el-col>
           </el-row>
         </el-card>

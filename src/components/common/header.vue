@@ -57,7 +57,7 @@
 export default {
   computed: {
     getCollapse() {
-      return this.$store.state.isCollapse
+      return this.$store.state.collapse.isCollapse
     },
   },
   data() {
@@ -80,7 +80,7 @@ export default {
       })
     },
     pointClick() {
-      this.$store.commit('collapse')
+      this.$store.commit('collapse/collapse')
     },
   },
 }

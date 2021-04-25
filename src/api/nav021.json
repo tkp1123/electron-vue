@@ -168,9 +168,29 @@
         },
         {
             "id": "7",
-            "autoName": "报警页面",
-            "path": "warnning",
-            "icon": "iconfont icon-baojing"
+            "autoName": "日志管理",
+            "path": "setting",
+            "icon": "iconfont icon-rizhi",
+            "children": [
+                {
+                    "id": "7-1",
+                    "autoName": "报警页面",
+                    "path": "warnning",
+                    "icon": "iconfont icon-baojing"
+                },
+                {
+                    "id": "7-2",
+                    "autoName": "操作记录",
+                    "path": "operationrecord",
+                    "icon": "iconfont icon-baojing"
+                },
+                {
+                    "id": "7-3",
+                    "autoName": "进出时间",
+                    "path": "InAndOut",
+                    "icon": "iconfont icon-baojing"
+                }
+            ]
         }
     ]
 }
