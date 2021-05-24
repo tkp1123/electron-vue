@@ -2,8 +2,10 @@
   <!-- 侧边  -->
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="nav_title">
-      <img class="img" src="@/assets/logo.png" />
-      <!-- <span v-if="!getCollapse">管理系统</span> -->
+      <span v-if="getCollapse" style="font-size: 14px; font-weight: 700"
+        >GSI</span
+      >
+      <img class="img" src="@/assets/logo.png" v-else />
     </div>
     <div class="sign-button" @click="pointClick">
       <div>签到</div>
@@ -506,7 +508,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .img {
-  width: 45px;
+  width: 180px;
   height: 45px;
 }
 

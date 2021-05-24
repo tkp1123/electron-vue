@@ -9,25 +9,13 @@
           @click="pointClick"
         ></i>
       </el-col>
-      <el-col :span="20" class="text-right">
-        <el-row>
-          <el-col
-            :span="16"
-            :xl="16"
-            :lg="14"
-            :md="8"
-            :sm="4"
-            :xs="0"
-            class="grid-content"
-          >
-          </el-col>
-          <el-col :span="8" :xl="8" :lg="10" :md="16" :sm="20" :xs="24">
-            <el-row :gutter="20" class="text-right-dropdown">
-              <el-col :span="8" :offset="4">工作模式 : 自动</el-col>
-              <el-col :span="8" :offset="4">工作状态 : 空闲</el-col>
-            </el-row>
-          </el-col>
-        </el-row>
+      <el-col
+        :span="20"
+        class="text-right"
+        style="display: flex; justify-content: flex-end"
+      >
+        <span style="padding-right: 30px">工作模式 : 自动</span>
+        <span>工作状态 : 空闲</span>
       </el-col>
       <el-col :span="2" class="text-right-dropdown">
         <el-dropdown>

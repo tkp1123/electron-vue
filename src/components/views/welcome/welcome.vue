@@ -1,12 +1,44 @@
 <template>
   <div class="contain">
-    <el-row style="padding: 10px">
-      <el-col :span="12">
-        <el-col :span="12">已完成批次数 : 1</el-col>
-        <el-col :span="12">已完成板件数 : 1</el-col>
+    <el-card style="margin: 20px" shadow="never">
+      <el-row style="padding: 10px 30px" :gutter="30">
+        <el-col :span="12">
+          <el-col :span="12">已完成批次数 : 1</el-col>
+          <el-col :span="12">已完成板件数 : 1</el-col>
+        </el-col>
+      </el-row>
+    </el-card>
+    <el-row :gutter="20" style="padding: 20px">
+      <el-col :span="6" class="title_flex">
+        <div>工作状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
+      </el-col>
+      <el-col :span="6" v-if="parameterName == '021'" class="title_flex">
+        <div>线体状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
+      </el-col>
+      <el-col :span="6" v-if="parameterName == '021'" class="title_flex">
+        <div>溶胶机状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
+      </el-col>
+      <el-col :span="6" v-if="parameterName == '021'" class="title_flex">
+        <div>清洗机状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
+      </el-col>
+      <el-col :span="6" v-if="parameterName == '029'" class="title_flex">
+        <div>线体状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
+      </el-col>
+      <el-col :span="6" v-if="parameterName == '029'" class="title_flex">
+        <div>多片锯状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
+      </el-col>
+      <el-col :span="6" v-if="parameterName == '029'" class="title_flex">
+        <div>液压升降状态：</div>
+        <img class="img-title" src="../../../assets/green.png" />
       </el-col>
     </el-row>
-    <el-row :gutter="20" v-if="parameterName == '029'">
+    <el-row :gutter="20" v-if="parameterName == '029'" class="title_flex">
       <el-col :span="24">
         <img class="img-bg" src="../../../assets/029-1.png" />
         <img class="img-circle12" src="../../../assets/111.png" />
@@ -187,8 +219,18 @@ export default {
 .el-row {
   margin: 0 !important;
 }
+.img-title {
+  width: 40px;
+  height: 40px;
+}
 .img-bg {
   width: 100%;
+}
+.title_flex {
+  display: flex;
+  // justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 // .el-card {
 //   background-color: #000;

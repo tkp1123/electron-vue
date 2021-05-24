@@ -60,7 +60,7 @@
             label="修改时间"
             :formatter="formatRegisterDate"
           ></el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" width="150">
             <template slot-scope="scope">
               <el-button
                 size="mini"
