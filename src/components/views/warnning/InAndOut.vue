@@ -19,76 +19,112 @@
               </el-row>
             </el-col>
             <el-col :span="4" :xs="24" class="text-right">
-              <el-button type="primary" @click="search()">查询</el-button>
+              <el-button type="primary" @click="getProcessing_log_search()">
+                查询
+              </el-button>
             </el-col>
           </el-row>
         </el-card>
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
-          <el-table-column prop="tiaoma" label="产品条码号"></el-table-column>
           <el-table-column
-            prop="bianhao"
+            prop="productSerialNumber"
+            label="产品条码号"
+          ></el-table-column>
+          <el-table-column
+            prop="partMaterialCode"
             label="产品物料编号"
           ></el-table-column>
-          <el-table-column prop="jinshijian" label="进时间"></el-table-column>
-          <el-table-column prop="chushijian" label="出时间"></el-table-column>
-          <el-table-column prop="tongguo" label="通过时长"></el-table-column>
-          <el-table-column prop="mingcheng" label="设备名称"></el-table-column>
-          <el-table-column prop="gongxu" label="工序"></el-table-column>
+          <el-table-column prop="deviceName" label="设备名称"></el-table-column>
+          <el-table-column
+            prop="operationShortName"
+            label="工序"
+          ></el-table-column>
+          <el-table-column
+            prop="entryTime"
+            label="进时间"
+            :formatter="formatDate"
+          ></el-table-column>
+          <el-table-column
+            prop="exitTime"
+            label="出时间"
+            :formatter="formatDate"
+          ></el-table-column>
+          <el-table-column
+            prop="processingTime"
+            label="通过时长"
+          ></el-table-column>
         </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[10, 20, 30]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          ></el-pagination>
+        </el-row>
       </el-row>
     </el-card>
   </div>
 </template>
 <script>
+import { processing_log } from '@/api/cloudApi'
+import { dateUtil } from '../../../common/dateUtil'
 export default {
   //进出时间
   name: 'InAndOut',
   data() {
     return {
+      parameterName: '',
       value1: '',
-      tableData: [
-        {
-          tiaoma: '20211415',
-          bianhao: 'MB100010002',
-          jinshijian: '2021-4-25 16:31:37',
-          chushijian: '2021-4-25 16:31:58',
-          tongguo: '1',
-          mingcheng: '清洗机',
-          gongxu: '清洗',
-        },
-        {
-          tiaoma: '20211415',
-          bianhao: 'MB100010002',
-          jinshijian: '2021-4-25 16:31:37',
-          chushijian: '2021-4-25 16:31:58',
-          tongguo: '1',
-          mingcheng: '清洗机',
-          gongxu: '清洗',
-        },
-        {
-          tiaoma: '20211415',
-          bianhao: 'MB100010002',
-          jinshijian: '2021-4-25 16:31:37',
-          chushijian: '2021-4-25 16:31:58',
-          tongguo: '1',
-          mingcheng: '溶胶机',
-          gongxu: '溶胶',
-        },
-        {
-          tiaoma: '20211415',
-          bianhao: 'MB100010002',
-          jinshijian: '2021-4-25 16:31:37',
-          chushijian: '2021-4-25 16:31:58',
-          tongguo: '1',
-          mingcheng: '龙门架',
-          gongxu: '运送',
-        },
-      ],
+      tableData: [],
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
     }
   },
-  methods: {},
+
+  mounted() {
+    this.getProcessing_log()
+  },
+  methods: {
+    getProcessing_log() {
+      let param = {
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+        sortDirection: 'DESC',
+        createBegin: dateUtil.dateValue(this.value1[0]),
+        createEnd: dateUtil.dateValue(this.value1[1]),
+      }
+      processing_log(param).then((res) => {
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
+      })
+    },
+    getProcessing_log_search() {
+      this.currentPage = 1
+      this.getProcessing_log()
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.currentPage = 1
+      this.getProcessing_log()
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      this.getProcessing_log()
+    },
+    formatDate(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
+    },
+  },
 }
 </script>
 <style  lang="less" scoped>

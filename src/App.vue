@@ -22,13 +22,11 @@ export default {
   },
   methods: {
     get_mes_info_parameterName() {
+      store.commit('parameterName/SET_PARAMETERNAME', '029')
       mes_info_parameterName('LINE_CODE').then((res) => {
         console.log(res.data)
         if (res.name == '') {
-          store.commit(
-            'parameterName/SET_PARAMETERNAME',
-            res.data.parameterData
-          )
+          //store.commit('parameterName/SET_PARAMETERNAME', '021')
         }
       })
     },

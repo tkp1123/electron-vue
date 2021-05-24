@@ -6,7 +6,29 @@
           <el-card shadow="never">
             <el-row :gutter="10">
               <el-col :span="20" :xs="24">
-                <el-row :gutter="10">
+                <el-row :gutter="10" v-if="parameterName == '029'">
+                  <el-col :span="12" :xs="24">
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >生产批次号 :{{ productionBatchCode }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >总任务数 :{{ taskNumber }}</el-col
+                      >
+                    </el-row>
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单序号 :{{ taskSequenceNumber }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单生产数量 :{{ quantity }}</el-col
+                      >
+                    </el-row>
+                  </el-col>
+                  <el-col :span="12" :xs="24"> </el-col>
+                </el-row>
+
+                <el-row :gutter="10" v-else>
                   <el-col :span="12" :xs="24">
                     <el-row>
                       <el-col :span="12" :xs="24" class="panel-content-title"
@@ -37,19 +59,27 @@
                 </el-row>
               </el-col>
               <el-col :span="4" :xs="24">
-                <el-row>
-                  <el-col :span="24">
-                    <el-button type="primary" @click="get_ask_task()">
-                      批次获取
-                    </el-button>
-                  </el-col>
-                </el-row>
+                <el-button
+                  type="primary"
+                  style="margin: 5px"
+                  @click="get_ask_task()"
+                >
+                  批次获取
+                </el-button>
+                <el-button
+                  type="primary"
+                  style="margin: 5px"
+                  v-if="parameterName == '029'"
+                  @click="get_ask_task()"
+                >
+                  开始
+                </el-button>
               </el-col>
             </el-row>
           </el-card>
         </el-col>
       </el-row>
-      <el-row v-if="parameterName != '029'">
+      <el-row v-if="parameterName == '029'">
         <el-table :data="tableData_029" border stripe style="width: 100%">
           <el-table-column
             prop="MatSequenceNumber"

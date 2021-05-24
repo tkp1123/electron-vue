@@ -1,7 +1,15 @@
 import http from './http'
 import qs from 'qs';
-let resquest = "http://192.168.2.25:11205"
+let resquest = "http://things.hsls:11205"
 
+//登录
+export function loginAPI(params) {
+    return http.post(`${resquest}/api/auth/user/access-token`, qs.stringify(params))
+}
+//获取用户权限
+export function resourceAPI() {
+    return http.get(`${resquest}/api/resource`)
+}
 //issue-task MES任务需求单分页查询
 export function issue_task(params) {
     return http.get(`${resquest}/api/siemens/issue-task`, params)
@@ -18,16 +26,16 @@ export function process_info(params) {
 export function task_sets(params) {
     return http.get(`${resquest}/api/siemens/task-sets`, params)
 }
-//mes接口 /api/mes-info
+//mes接口 /api/system-info
 export function mes_info(params) {
-    return http.get(`${resquest}/api/mes-info`, params)
+    return http.get(`${resquest}/api/system-info`, params)
 }
 export function mes_info_parameterName(param) {
-    return http.get(`${resquest}/api/mes-info/parameterName/${param}`)
+    return http.get(`${resquest}/api/system-info/parameterName/${param}`)
 }
-//mes接口修改 /api/mes-info
+//mes接口修改 /api/system-info
 export function mes_info_upgrade(param, data) {
-    return http.put(`${resquest}/api/mes-info/${param.id}`, qs.stringify(data))
+    return http.put(`${resquest}/api/system-info/${param.id}`, qs.stringify(data))
 }
 //根据部件顺序号获取全部任务信息    贴皮工序
 export function siemens_task_all(params) {
@@ -85,4 +93,56 @@ export function part_sets(params) {
 //MES提供给产线上位机调用的批次工艺请求接口     mes任务批次获取 /api/siemens-interaction/ask-task
 export function ask_task(params) {
     return http.post(`${resquest}/api/siemens-interaction/ask-task`, qs.stringify(params))
+}
+//报警页面   查询报警记录/api/system-info/error-log
+export function error_log(params) {
+    return http.get(`${resquest}/api/system-info/error-log`, params)
+}
+//部件进出时间  部件加工进入时间   /api/siemens/processing-log
+export function processing_log(params) {
+    return http.get(`${resquest}/api/siemens/processing-log`, params)
+}
+//用户分页查询   /api/users
+export function api_users(params) {
+    return http.get(`${resquest}/api/users`, params)
+}
+//获取用户
+export function api_users_get(params) {
+    return http.get(`${resquest}/api/users/${params}`)
+}
+//新增用户
+export function api_users_post(params) {
+    return http.post(`${resquest}/api/users`, qs.stringify(params))
+}
+//修改用户
+export function api_users_put(param, formData) {
+    return http.put(`${resquest}/api/users/${param}`, formData)
+}
+////删除用户
+export function api_users_delete(params) {
+    return http.delete(`${resquest}/api/users/${params.id}`)
+}
+//角色分页查询   /api/role
+export function api_role(params) {
+    return http.get(`${resquest}/api/role`, params)
+}
+//添加角色
+export function api_role_post(params) {
+    return http.post(`${resquest}/api/role`, qs.stringify(params))
+}
+//修改角色
+export function api_role_put(param) {
+    return http.put(`${resquest}/api/role/${param.id}`, qs.stringify(param))
+}
+//获取用户拥有权限信息
+export function api_resource_meg() {
+    return http.get(`${resquest}/api/resource/meg`)
+}
+//获取用户拥有权限信息
+export function api_resource_role_meg(params) {
+    return http.get(`${resquest}/api/resource/role-meg`, params)
+}
+//修改角色权限
+export function api_role_res_put(param) {
+    return http.put(`${resquest}/api/role/res`, param)
 }

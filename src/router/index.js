@@ -13,6 +13,11 @@ const router = new Router({
       redirect: '/home'
     },
     {
+      path: '/login',
+      name: 'login',
+      component: resolve => require(['@/components/views/login/login'], resolve)
+    },
+    {
       path: '/home',
       name: 'home',
       redirect: '/welcome',
@@ -253,13 +258,40 @@ const router = new Router({
           name: 'punchClock',
           component: resolve => require(['@/components/views/punchClock/punchClock'], resolve)
         },
+        //用户管理
+        {
+          path: '/userManage',
+          name: 'userManage',
+          component: resolve => require(['@/components/views/user/userManage'], resolve)
+        },
+        //用户修改
+        {
+          path: '/userEdit',
+          name: 'userEdit',
+          component: resolve => require(['@/components/views/user/userTemplate/userEdit'], resolve)
+        },
+        //角色管理
+        {
+          path: '/roleManage',
+          name: 'roleManage',
+          component: resolve => require(['@/components/views/user/roleManage'], resolve)
+        },
+        //角色修改权限
+        {
+          path: '/roleEdit',
+          name: 'roleEdit',
+          component: resolve => require(['@/components/views/user/roleTemplate/roleEdit'], resolve)
+        },
       ]
     }
   ]
 })
 //挂载路由导航守卫
 router.beforeEach(function (to, from, next) {
-
+  //在这里可以设置路由拦截
+  if (to.path == '/login') return next();
+  const token = window.localStorage.getItem('token');
+  if (!token) return next('/login');
   next();
 })
 export default router

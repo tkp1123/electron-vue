@@ -19,33 +19,32 @@
               </el-row>
             </el-col>
             <el-col :span="4" :xs="24" class="text-right">
-              <el-button type="primary" @click="search()">查询</el-button>
+              <el-button type="primary" @click="getError_log_search()"
+                >查询</el-button
+              >
             </el-col>
           </el-row>
         </el-card>
       </el-row>
       <el-row>
         <el-table :data="tableData" border stripe style="width: 100%">
+          <el-table-column prop="errorName" label="异常名称"></el-table-column>
+          <el-table-column prop="errorCode" label="异常编码"></el-table-column>
           <el-table-column
-            prop="RequestCode"
-            label="异常名称"
+            prop="created"
+            label="时间"
+            :formatter="formatDate"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="异常编号"></el-table-column>
-          <el-table-column prop="OperationCode" label="时间"></el-table-column>
-          <!-- <el-table-column
-            prop="OperationShortName"
-            label="事件"
-          ></el-table-column> -->
         </el-table>
         <el-row>
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="1"
+            :current-page="currentPage"
             :page-sizes="[10, 20, 30]"
-            :page-size="10"
+            :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="6"
+            :total="total"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -53,61 +52,56 @@
   </div>
 </template>
 <script>
+import { error_log } from '@/api/cloudApi'
+import { dateUtil } from '../../../common/dateUtil'
 export default {
   //报警页面
   name: 'warnning',
   data() {
     return {
       value1: '',
-      tableData: [
-        {
-          RequestCode: 'xxx1',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx2',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx3',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx4',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx5',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-        {
-          RequestCode: 'xxx6',
-          LineCode: 'xxx',
-          OperationCode: 'xxx',
-          OperationShortName: 'xxx',
-          EventCode: 'xxx',
-        },
-      ],
+      tableData: [],
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
     }
   },
+  mounted() {
+    this.getError_log()
+  },
   methods: {
-    handleSizeChange(val) {},
-    handleCurrentChange(val) {},
+    getError_log() {
+      let param = {
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+        sortDirection: 'DESC',
+        createBegin: dateUtil.dateValue(this.value1[0]),
+        createEnd: dateUtil.dateValue(this.value1[1]),
+      }
+      error_log(param).then((res) => {
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
+      })
+    },
+    getError_log_search() {
+      this.currentPage = 1
+      this.getError_log()
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.currentPage = 1
+      this.getError_log()
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      this.getError_log()
+    },
+    formatDate(row, column, cellValue) {
+      if (!cellValue) return ''
+      return dateUtil.fullFormatter(new Date(cellValue))
+    },
   },
 }
 </script>

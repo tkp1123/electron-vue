@@ -57,7 +57,7 @@
           </el-row>
         </el-card>
       </el-row>
-      <el-row>
+      <el-row v-if="parameterName == '021'">
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
@@ -112,6 +112,54 @@
           ></el-pagination>
         </el-row>
       </el-row>
+
+      <el-row v-else>
+        <el-table :data="tableData" border stripe style="width: 100%">
+          <el-table-column
+            prop="RequestCode"
+            label="产线编号"
+          ></el-table-column>
+          <el-table-column prop="LineCode" label="物料编号"></el-table-column>
+          <el-table-column
+            prop="OperationCode"
+            label="物料描述"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="材料"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="颜色"></el-table-column>
+          <el-table-column prop="EventCode" label="规格"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="投入物料数量"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="输出物料尺寸"
+          ></el-table-column>
+          <el-table-column label="工艺信息">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleDetail(scope.$index, scope.row)"
+                >详情</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 30]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="6"
+          ></el-pagination>
+        </el-row>
+      </el-row>
     </el-card>
   </div>
 </template>
@@ -121,6 +169,7 @@ export default {
   name: 'workOrder',
   data() {
     return {
+      parameterName: '',
       queryInfo: '',
       State: '',
       fileList: [],
@@ -169,6 +218,9 @@ export default {
         },
       ],
     }
+  },
+  created() {
+    this.parameterName = this.$store.state.parameterName.parameterName
   },
   methods: {
     handleSizeChange(val) {},

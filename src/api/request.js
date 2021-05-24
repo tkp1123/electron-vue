@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { Message } from 'element-ui';
-
+import store from '@/store'
 const service = axios.create({
     baseURL: '',
     timeout: 10 * 1000
 })
 service.interceptors.request.use(config => {
+    let token = 'Bearer ' + store.state.user.token
+    config.headers.Authorization = token;
     return config
 }, error => {
     Promise.reject(error)

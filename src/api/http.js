@@ -41,6 +41,19 @@ const http = {
         }
         return request(config)
     },
+    delete(url, params) {
+        const config = {
+            method: 'delete',
+            url: url
+        }
+        if (params) {
+            config.data = params
+            config.headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+            }
+        };
+        return request(config)
+    }
 }
 //导出
 export default http

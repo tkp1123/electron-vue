@@ -33,12 +33,6 @@
                     "children": []
                 },
                 {
-                    "id": "3-2",
-                    "autoName": "贴皮工序",
-                    "path": "stickingSkin",
-                    "children": []
-                },
-                {
                     "id": "3-3",
                     "autoName": "托盘绑定",
                     "path": "bindTray",
@@ -48,18 +42,6 @@
                     "id": "3-4",
                     "autoName": "自建工单",
                     "path": "workOrder",
-                    "children": []
-                },
-                {
-                    "id": "3-5",
-                    "autoName": "异常产品提报",
-                    "path": "abnormal",
-                    "children": []
-                },
-                {
-                    "id": "3-6",
-                    "autoName": "部件托盘上线",
-                    "path": "trayinformation",
                     "children": []
                 },
                 {
@@ -181,22 +163,26 @@
                 {
                     "id": "7-1",
                     "autoName": "报警页面",
-                    "path": "warnning",
-                    "icon": "iconfont icon-baojing"
+                    "path": "warnning"
                 },
                 {
                     "id": "7-2",
                     "autoName": "操作记录",
-                    "path": "operationrecord",
-                    "icon": "iconfont icon-baojing"
+                    "path": "operationrecord"
                 },
                 {
                     "id": "7-3",
                     "autoName": "进出时间",
-                    "path": "InAndOut",
-                    "icon": "iconfont icon-baojing"
+                    "path": "InAndOut"
                 }
             ]
+        },
+        {
+            "id": "8",
+            "autoName": "用户管理",
+            "path": "setting",
+            "icon": "iconfont icon-yonghu",
+            "children": []
         }
     ]
 }

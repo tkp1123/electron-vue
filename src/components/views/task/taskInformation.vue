@@ -209,8 +209,19 @@
             :formatter="formatDate"
           ></el-table-column>
           <el-table-column
+            v-if="parameterName != '029'"
             prop="nokQuantity"
             label="不良品数量"
+          ></el-table-column>
+          <el-table-column
+            v-if="parameterName == '029'"
+            prop="nokQuantity"
+            label="消耗数量"
+          ></el-table-column>
+          <el-table-column
+            v-if="parameterName == '029'"
+            prop="nokQuantity"
+            label="多产出数量"
           ></el-table-column>
           <el-table-column
             prop="scrappedQuantity"
@@ -280,6 +291,7 @@ export default {
   name: 'taskInformation',
   data() {
     return {
+      parameterName: '',
       productionBatchCode: '',
       orderBy: '',
       taskStatus: '',
@@ -292,6 +304,9 @@ export default {
       taskNumber: [],
       issueTask: [],
     }
+  },
+  created() {
+    this.parameterName = this.$store.state.parameterName.parameterName
   },
   mounted() {
     this.getIssue_task()

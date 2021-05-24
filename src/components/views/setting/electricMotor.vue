@@ -17,7 +17,9 @@
               </el-row>
             </el-col>
             <el-col :span="4" :xs="24" class="text-right">
-              <el-button type="primary" @click="search()">查询</el-button>
+              <el-button type="primary" @click="getMes_info_search()"
+                >查询</el-button
+              >
             </el-col>
           </el-row>
         </el-card>
@@ -43,11 +45,11 @@
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="1"
+            :current-page="currentPage"
             :page-sizes="[10, 20, 30]"
-            :page-size="10"
+            :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="6"
+            :total="total"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -80,6 +82,7 @@
   </div>
 </template>
 <script>
+import { mes_info, mes_info_upgrade } from '@/api/cloudApi'
 export default {
   //电机参数
   name: 'electricMotor',
@@ -87,44 +90,10 @@ export default {
     return {
       queryInfo: '',
       editDialogVisible: false,
-      tableData: [
-        {
-          xuhao: '1',
-          mingcheng: 'xxx',
-          zhi: 'xxx',
-          shuoming: 'xxx',
-        },
-        {
-          xuhao: '2',
-          mingcheng: 'xxx',
-          zhi: 'xxx',
-          shuoming: 'xxx',
-        },
-        {
-          xuhao: '3',
-          mingcheng: 'xxx',
-          zhi: 'xxx',
-          shuoming: 'xxx',
-        },
-        {
-          xuhao: '4',
-          mingcheng: 'xxx',
-          zhi: 'xxx',
-          shuoming: 'xxx',
-        },
-        {
-          xuhao: '5',
-          mingcheng: 'xxx',
-          zhi: 'xxx',
-          shuoming: 'xxx',
-        },
-        {
-          xuhao: '6',
-          mingcheng: 'xxx',
-          zhi: 'xxx',
-          shuoming: 'xxx',
-        },
-      ],
+      tableData: [],
+      total: 0,
+      currentPage: 1,
+      pageSize: 10,
       formEdit: {
         xuhao: '',
         mingcheng: '',
@@ -133,9 +102,36 @@ export default {
       },
     }
   },
+  mounted() {
+    this.getMes_info()
+  },
   methods: {
-    handleSizeChange(val) {},
-    handleCurrentChange(val) {},
+    getMes_info() {
+      let param = {
+        sortProperties: this.queryInfo,
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+        sortDirection: 'ASC',
+        parameterType: 'MOTOR',
+      }
+      mes_info(param).then((res) => {
+        if (res.name == '') {
+          this.tableData = res.data.items
+          this.total = res.data.itemCount
+        }
+      })
+    },
+    getMes_info_search() {
+      this.currentPage = 1
+      this.getMes_info()
+    },
+    handleSizeChange(val) {
+      this.pageSize = val
+      this.currentPage = 1
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+    },
     editList(index, row) {
       this.formEdit.xuhao = row.xuhao
       this.formEdit.mingcheng = row.mingcheng

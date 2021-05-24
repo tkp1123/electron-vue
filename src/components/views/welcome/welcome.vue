@@ -2,35 +2,32 @@
   <div class="contain">
     <el-row style="padding: 10px">
       <el-col :span="12">
-        <el-col :span="12" style="color: #fff">已完成批次数 : 1</el-col>
-        <el-col :span="12" style="color: #fff">已完成板件数 : 1</el-col>
+        <el-col :span="12">已完成批次数 : 1</el-col>
+        <el-col :span="12">已完成板件数 : 1</el-col>
       </el-col>
-      <!-- <el-table
-          :data="tableData2"
-          border
-          stripe
-          :row-style="tableRowStyle"
-          :cell-style="rowStyle"
-          style="width: 100%"
-          :header-cell-style="{
-            'text-align': 'center',
-            background: '#000',
-            color: '#fff',
-          }"
-        >
-          <el-table-column
-            prop="userName"
-            label="已完成批次数"
-          ></el-table-column>
-          <el-table-column
-            prop="statusDate"
-            label="已完成板件数"
-          ></el-table-column>
-        </el-table> -->
     </el-row>
-    <el-row :gutter="20">
+    <el-row :gutter="20" v-if="parameterName == '029'">
       <el-col :span="24">
-        <img class="img-bg" src="../../../assets/chanxian.png" />
+        <img class="img-bg" src="../../../assets/029-1.png" />
+        <img class="img-circle12" src="../../../assets/111.png" />
+        <img class="img-circle13" src="../../../assets/111.png" />
+        <img class="img-circle14" src="../../../assets/111.png" />
+        <img class="img-circle15" src="../../../assets/111.png" />
+        <img class="img-circle16" src="../../../assets/111.png" />
+        <img class="img-circle17" src="../../../assets/111.png" />
+        <img class="img-circle18" src="../../../assets/111.png" />
+        <img class="img-circle19" src="../../../assets/111.png" />
+        <img class="img-circle20" src="../../../assets/111.png" />
+        <img class="img-circle21" src="../../../assets/111.png" />
+        <img class="img-circle22" src="../../../assets/111.png" />
+        <img class="img-circle23" src="../../../assets/111.png" />
+        <img class="img-circle24" src="../../../assets/111.png" />
+        <img class="img-circle25" src="../../../assets/111.png" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20" v-else>
+      <el-col :span="24">
+        <img class="img-bg" src="../../../assets/021-1.png" />
         <img class="img-circle1" src="../../../assets/111.png" />
         <img class="img-circle2" src="../../../assets/111.png" />
         <img class="img-circle3" src="../../../assets/111.png" />
@@ -40,6 +37,8 @@
         <img class="img-circle7" src="../../../assets/111.png" />
         <img class="img-circle8" src="../../../assets/111.png" />
         <img class="img-circle9" src="../../../assets/111.png" />
+        <img class="img-circle10" src="../../../assets/111.png" />
+        <img class="img-circle11" src="../../../assets/111.png" />
       </el-col>
     </el-row>
     <el-row :gutter="20">
@@ -50,13 +49,9 @@
               :data="tableData1"
               border
               stripe
-              :row-style="tableRowStyle"
-              :cell-style="rowStyle"
               style="width: 100%"
               :header-cell-style="{
                 'text-align': 'center',
-                background: '#000',
-                color: '#fff',
               }"
             >
               <el-table-column
@@ -76,16 +71,12 @@
           </el-col>
           <el-col :span="12">
             <el-table
-              :data="tableData3"
+              :data="tableData"
               border
               stripe
-              :row-style="tableRowStyle"
-              :cell-style="rowStyle"
               style="width: 100%"
               :header-cell-style="{
                 'text-align': 'center',
-                background: '#000',
-                color: '#fff',
               }"
             >
               <el-table-column
@@ -106,6 +97,7 @@ export default {
   name: 'welcome',
   data() {
     return {
+      parameterName: '',
       tableData1: [
         {
           OperationCode: '1',
@@ -138,13 +130,8 @@ export default {
           State: '空闲',
         },
       ],
+      tableData: [],
       tableData2: [
-        {
-          userName: '1',
-          statusDate: '1',
-        },
-      ],
-      tableData3: [
         {
           userName: '线体',
           statusDate: '离线',
@@ -158,33 +145,44 @@ export default {
           statusDate: '离线',
         },
       ],
+      tableData3: [
+        {
+          userName: '线体',
+          statusDate: '离线',
+        },
+        {
+          userName: '多片锯',
+          statusDate: '离线',
+        },
+        {
+          userName: '液压升降',
+          statusDate: '离线',
+        },
+      ],
     }
   },
+  created() {
+    this.parameterName = this.$store.state.parameterName.parameterName
+  },
+  mounted() {
+    this.getParameterName()
+  },
   methods: {
-    tableRowStyle({ row, rowIndex }) {
-      if (row) {
-        return {
-          backgroundColor: '#000',
-          color: '#fff',
-        }
-      }
-    },
-    rowStyle({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex % 2 === 0) {
-        return 'background:#000;color: #FFFFFF;'
-      }
-      if (rowIndex % 2 === 1) {
-        return 'background:#000;color: #FFFFFF;'
+    getParameterName() {
+      if (this.parameterName == '029') {
+        this.tableData = this.tableData3
+      } else {
+        this.tableData = this.tableData2
       }
     },
   },
 }
 </script>
 <style  lang="less" scoped>
-.contain {
-  height: calc(100vh - 65px);
-  background-color: #000;
-}
+// .contain {
+//   height: calc(100vh - 65px);
+//   background-color: #000;
+// }
 
 .el-row {
   margin: 0 !important;
@@ -192,10 +190,10 @@ export default {
 .img-bg {
   width: 100%;
 }
-.el-card {
-  background-color: #000;
-  border: 1px solid #000;
-}
+// .el-card {
+//   background-color: #000;
+//   border: 1px solid #000;
+// }
 .img-circle1 {
   position: absolute;
   width: 60px;
@@ -208,11 +206,11 @@ export default {
 @keyframes circle1 {
   from {
     right: 12%;
-    top: 30%;
+    top: 36%;
   }
   to {
     right: 12%;
-    top: 13%;
+    top: 19%;
   }
 }
 .img-circle2 {
@@ -227,11 +225,11 @@ export default {
 @keyframes circle2 {
   from {
     right: 12%;
-    top: 13%;
+    top: 19%;
   }
   to {
-    right: 21%;
-    top: 13%;
+    right: 23%;
+    top: 19%;
   }
 }
 .img-circle3 {
@@ -245,12 +243,12 @@ export default {
 }
 @keyframes circle3 {
   from {
-    right: 21%;
-    top: 13%;
+    right: 23%;
+    top: 19%;
   }
   to {
-    right: 30%;
-    top: 13%;
+    right: 32%;
+    top: 19%;
   }
 }
 .img-circle4 {
@@ -264,12 +262,12 @@ export default {
 }
 @keyframes circle4 {
   from {
-    right: 30%;
-    top: 13%;
+    right: 32%;
+    top: 19%;
   }
   to {
-    right: 39%;
-    top: 13%;
+    right: 42%;
+    top: 19%;
   }
 }
 .img-circle5 {
@@ -283,12 +281,12 @@ export default {
 }
 @keyframes circle5 {
   from {
-    right: 39%;
-    top: 13%;
+    right: 42%;
+    top: 19%;
   }
   to {
-    right: 45%;
-    top: 13%;
+    right: 51%;
+    top: 19%;
   }
 }
 .img-circle6 {
@@ -302,12 +300,12 @@ export default {
 }
 @keyframes circle6 {
   from {
-    right: 45%;
-    top: 13%;
+    right: 51%;
+    top: 19%;
   }
   to {
-    right: 51%;
-    top: 13%;
+    right: 65%;
+    top: 19%;
   }
 }
 .img-circle7 {
@@ -321,12 +319,12 @@ export default {
 }
 @keyframes circle7 {
   from {
-    right: 51%;
-    top: 13%;
+    right: 65%;
+    top: 19%;
   }
   to {
-    right: 58%;
-    top: 13%;
+    right: 78%;
+    top: 19%;
   }
 }
 .img-circle8 {
@@ -340,12 +338,12 @@ export default {
 }
 @keyframes circle8 {
   from {
-    right: 58%;
-    top: 13%;
+    right: 78%;
+    top: 19%;
   }
   to {
-    right: 64%;
-    top: 13%;
+    right: 87%;
+    top: 19%;
   }
 }
 .img-circle9 {
@@ -359,12 +357,319 @@ export default {
 }
 @keyframes circle9 {
   from {
-    right: 64%;
-    top: 13%;
+    right: 87%;
+    top: 19%;
+  }
+  to {
+    right: 84%;
+    top: 59.6%;
+  }
+}
+.img-circle10 {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  animation-name: circle10;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle10 {
+  from {
+    right: 84%;
+    top: 59.6%;
+  }
+  to {
+    right: 70%;
+    top: 90%;
+  }
+}
+.img-circle11 {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  animation-name: circle11;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle11 {
+  from {
+    right: 70%;
+    top: 90%;
+  }
+  to {
+    right: 14%;
+    top: 90%;
+  }
+}
+.img-circle12 {
+  position: absolute;
+  width: 120px;
+  height: 76px;
+  animation-name: circle12;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle12 {
+  from {
+    right: 10%;
+    top: 43.5%;
+  }
+  to {
+    right: 25%;
+    top: 43.5%;
+  }
+}
+.img-circle13 {
+  position: absolute;
+  width: 120px;
+  height: 76px;
+  animation-name: circle13;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle13 {
+  from {
+    right: 25%;
+    top: 43.5%;
+  }
+  to {
+    right: 34%;
+    top: 43.5%;
+  }
+}
+.img-circle14 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle14;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle14 {
+  from {
+    right: 35.5%;
+    top: 45%;
+  }
+  to {
+    right: 48%;
+    top: 45%;
+  }
+}
+.img-circle15 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle15;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle15 {
+  from {
+    right: 35.5%;
+    top: 49%;
+  }
+  to {
+    right: 48%;
+    top: 49%;
+  }
+}
+.img-circle16 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle16;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle16 {
+  from {
+    right: 35.5%;
+    top: 53%;
+  }
+  to {
+    right: 48%;
+    top: 53%;
+  }
+}
+
+.img-circle17 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle17;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle17 {
+  from {
+    right: 48%;
+    top: 45%;
+  }
+  to {
+    right: 61%;
+    top: 45%;
+  }
+}
+.img-circle18 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle18;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle18 {
+  from {
+    right: 48%;
+    top: 49%;
+  }
+  to {
+    right: 61%;
+    top: 49%;
+  }
+}
+.img-circle19 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle19;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle19 {
+  from {
+    right: 48%;
+    top: 53%;
+  }
+  to {
+    right: 61%;
+    top: 53%;
+  }
+}
+
+.img-circle20 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle20;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle20 {
+  from {
+    right: 61%;
+    top: 45%;
+  }
+  to {
+    right: 67%;
+    top: 45%;
+  }
+}
+.img-circle21 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle21;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle21 {
+  from {
+    right: 61%;
+    top: 49%;
+  }
+  to {
+    right: 67%;
+    top: 49%;
+  }
+}
+.img-circle22 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle22;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle22 {
+  from {
+    right: 61%;
+    top: 53%;
+  }
+  to {
+    right: 67%;
+    top: 53%;
+  }
+}
+
+.img-circle23 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle23;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle23 {
+  from {
+    right: 67%;
+    top: 45%;
   }
   to {
     right: 74%;
-    top: 13%;
+    top: 45%;
+  }
+}
+.img-circle24 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle24;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle24 {
+  from {
+    right: 67%;
+    top: 49%;
+  }
+  to {
+    right: 74%;
+    top: 49%;
+  }
+}
+.img-circle25 {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  animation-name: circle25;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+@keyframes circle25 {
+  from {
+    right: 67%;
+    top: 53%;
+  }
+  to {
+    right: 74%;
+    top: 53%;
   }
 }
 </style>

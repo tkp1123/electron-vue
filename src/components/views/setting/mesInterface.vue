@@ -126,10 +126,11 @@ export default {
   methods: {
     getMes_info() {
       let param = {
-        id: this.queryInfo,
+        sortProperties: this.queryInfo,
         pageIndex: this.currentPage,
         pageSize: this.pageSize,
         sortDirection: 'ASC',
+        parameterType: 'MES',
       }
       mes_info(param).then((res) => {
         if (res.name == '') {

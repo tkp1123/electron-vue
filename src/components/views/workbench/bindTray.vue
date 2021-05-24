@@ -1,35 +1,47 @@
 <template>
   <div>
-    <el-row :gutter="30" style="padding: 50px 150px">
+    <el-row :gutter="30" style="padding: 50px 100px">
       <el-card shadow="never">
         <el-row :gutter="10" style="padding: 10px">
           <el-card shadow="never" style="padding: 10px">
             <el-row>
-              <el-col :span="20" :xs="24">
+              <el-col :span="18" :xs="24">
                 <el-row>
-                  <el-col :span="14" style="text-align: left">
-                    <el-row :gutter="10">
-                      <el-col
-                        :span="6"
-                        style="text-align: right; line-height: 40px"
-                        >托盘号:</el-col
-                      >
-                      <el-col :span="18">
-                        <el-input
-                          v-model="palletCode"
-                          clearable
-                          placeholder="请输入托盘号/生产条码号"
-                        >
-                        </el-input>
-                      </el-col>
-                    </el-row>
+                  <el-col :span="12">
+                    托盘号:
+                    <el-input
+                      v-model="palletCode"
+                      clearable
+                      style="width: 200px"
+                      placeholder="请输入托盘号/生产条码号"
+                    >
+                    </el-input>
+                  </el-col>
+                  <el-col :span="12" v-if="parameterName == '029'">
+                    数量:
+                    <el-input
+                      v-model="palletCode"
+                      clearable
+                      style="width: 200px"
+                      placeholder="请输入数量"
+                    >
+                    </el-input>
                   </el-col>
                 </el-row>
               </el-col>
-              <el-col :span="4" :xs="24" class="text-center">
-                <el-button type="primary" @click="bing_pallet_submit()"
-                  >提交</el-button
-                >
+              <el-col
+                :span="2"
+                class="text-center"
+                v-if="parameterName == '029'"
+              >
+                <el-button type="primary" @click="bing_pallet_submit()">
+                  确认
+                </el-button>
+              </el-col>
+              <el-col :span="2" class="text-center">
+                <el-button type="primary" @click="bing_pallet_submit()">
+                  提交
+                </el-button>
               </el-col>
             </el-row>
           </el-card>
@@ -60,13 +72,16 @@ export default {
   name: 'bindTray',
   data() {
     return {
+      parameterName: '',
       palletCode: '',
       EXIT_CODE: '',
       tableData: [],
       PartSerialNumber: [],
     }
   },
-
+  created() {
+    this.parameterName = this.$store.state.parameterName.parameterName
+  },
   mounted() {
     let str = ''
     let vm = this
