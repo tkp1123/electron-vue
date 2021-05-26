@@ -15,19 +15,19 @@
                 <el-col :span="24">{{ form.PartsQuantity }}</el-col>
               </el-form-item>
               <el-form-item label="物料编号 :">
-                <el-input v-model="form.MaterialCode"></el-input>
+                <el-col :span="24">{{ form.MaterialCode }}</el-col>
               </el-form-item>
               <el-form-item label="上线口 :">
-                <el-input v-model="form.EntranceCode"></el-input>
+                <el-col :span="24">{{ form.EntranceCode }}</el-col>
               </el-form-item>
               <el-form-item label="消耗数量 :">
-                <el-input v-model="form.UsedQuantity"></el-input>
+                <el-col :span="24">{{ form.UsedQuantity }}</el-col>
               </el-form-item>
               <el-form-item label="报废数量 :">
                 <el-input v-model="form.ScrappedQuantity"></el-input>
               </el-form-item>
               <el-form-item label="多产出数量 :">
-                <el-input v-model="form.RedundantiPartsQuantity"></el-input>
+                <el-col :span="24">{{ form.RedundantiPartsQuantity }}</el-col>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -49,12 +49,12 @@ export default {
         ProductionBatchCode: 'xxx',
         PartMaterialCode: 'xxx',
         PartsQuantity: 'xxx',
-        MaterialCode: '',
-        EntranceCode: '',
-        UsedQuantity: '',
-        ScrappedQuantity: '',
-        DefectQuantity: '',
-        RedundantiPartsQuantity: '',
+        MaterialCode: 'xxx',
+        EntranceCode: 'xxx',
+        UsedQuantity: 'xxx',
+        ScrappedQuantity: 'xxx',
+        DefectQuantity: 'xxx',
+        RedundantiPartsQuantity: 'xxx',
       },
     }
   },

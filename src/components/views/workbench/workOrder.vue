@@ -61,35 +61,31 @@
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
-            label="请求编号"
+            label="产线编号"
           ></el-table-column>
-          <el-table-column prop="LineCode" label="产线编号"></el-table-column>
+          <el-table-column prop="LineCode" label="托盘编号"></el-table-column>
           <el-table-column
             prop="OperationCode"
-            label="工序编号"
+            label="物料编号"
           ></el-table-column>
           <el-table-column
             prop="OperationShortName"
-            label="工序短名称"
-          ></el-table-column>
-          <el-table-column prop="EventCode" label="事件码"></el-table-column>
-          <el-table-column
-            prop="EventCode"
-            label="产出物料的物料编码"
+            label="物料描述"
           ></el-table-column>
           <el-table-column
             prop="EventCode"
-            label="产出物料的物料名称或描述"
+            label="门扇尺寸-高"
           ></el-table-column>
           <el-table-column
             prop="EventCode"
-            label="生产批次号"
+            label="门扇尺寸-宽"
           ></el-table-column>
           <el-table-column
             prop="EventCode"
-            label="请求(操作)时间"
+            label="门扇尺寸-厚"
           ></el-table-column>
-          <el-table-column prop="EventCode" label="总任务数"></el-table-column>
+          <el-table-column prop="EventCode" label="门扇款式"></el-table-column>
+          <el-table-column prop="EventCode" label="物料数量"></el-table-column>
           <el-table-column label="工艺信息">
             <template slot-scope="scope">
               <el-button
@@ -113,7 +109,7 @@
         </el-row>
       </el-row>
 
-      <el-row v-else>
+      <el-row v-else-if="parameterName == '029'">
         <el-table :data="tableData" border stripe style="width: 100%">
           <el-table-column
             prop="RequestCode"
@@ -147,6 +143,82 @@
               >
             </template>
           </el-table-column>
+        </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 30]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="6"
+          ></el-pagination>
+        </el-row>
+      </el-row>
+      <el-row v-else-if="parameterName == '011'">
+        <el-table :data="tableData" border stripe style="width: 100%">
+          <el-table-column
+            prop="RequestCode"
+            label="物料序号"
+          ></el-table-column>
+          <el-table-column prop="LineCode" label="物料编号"></el-table-column>
+          <el-table-column
+            prop="OperationCode"
+            label="物料描述"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="材质"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="颜色"></el-table-column>
+          <el-table-column prop="EventCode" label="规格"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="上料口编号"
+          ></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="投入物料的数量"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="封边材料"></el-table-column>
+          <el-table-column prop="EventCode" label="封边类型"></el-table-column>
+          <el-table-column prop="EventCode" label="开槽工艺"></el-table-column>
+        </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 30]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="6"
+          ></el-pagination>
+        </el-row>
+      </el-row>
+      <el-row v-else-if="parameterName == '014'">
+        <el-table :data="tableData" border stripe style="width: 100%">
+          <el-table-column
+            prop="RequestCode"
+            label="物料序号"
+          ></el-table-column>
+          <el-table-column prop="LineCode" label="物料编号"></el-table-column>
+          <el-table-column
+            prop="OperationCode"
+            label="物料描述"
+          ></el-table-column>
+          <el-table-column
+            prop="OperationShortName"
+            label="材质"
+          ></el-table-column>
+          <el-table-column prop="EventCode" label="颜色"></el-table-column>
+          <el-table-column prop="EventCode" label="规格"></el-table-column>
+          <el-table-column prop="EventCode" label="温度"></el-table-column>
+          <el-table-column
+            prop="EventCode"
+            label="投入物料的数量"
+          ></el-table-column>
         </el-table>
         <el-row>
           <el-pagination

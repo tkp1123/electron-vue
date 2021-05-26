@@ -28,7 +28,7 @@
                   <el-col :span="12" :xs="24"> </el-col>
                 </el-row>
 
-                <el-row :gutter="10" v-else>
+                <el-row :gutter="10" v-else-if="parameterName == '021'">
                   <el-col :span="12" :xs="24">
                     <el-row>
                       <el-col :span="12" :xs="24" class="panel-content-title"
@@ -38,6 +38,56 @@
                         >工序短名称 :{{ operationShortName }}</el-col
                       >
                     </el-row>
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >生产批次号 :{{ productionBatchCode }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >总任务数 :{{ taskNumber }}</el-col
+                      >
+                    </el-row>
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单序号 :{{ taskSequenceNumber }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单生产数量 :{{ quantity }}</el-col
+                      >
+                    </el-row>
+                  </el-col>
+                  <el-col :span="12" :xs="24"> </el-col>
+                </el-row>
+                <el-row :gutter="10" v-else-if="parameterName == '011'">
+                  <el-col :span="12" :xs="24">
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >工序编号 :{{ operationCode }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >工序短名称 :{{ operationShortName }}</el-col
+                      >
+                    </el-row>
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >生产批次号 :{{ productionBatchCode }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >总任务数 :{{ taskNumber }}</el-col
+                      >
+                    </el-row>
+                    <el-row>
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单序号 :{{ taskSequenceNumber }}</el-col
+                      >
+                      <el-col :span="12" :xs="24" class="panel-content-title"
+                        >当前任务单生产数量 :{{ quantity }}</el-col
+                      >
+                    </el-row>
+                  </el-col>
+                  <el-col :span="12" :xs="24"> </el-col>
+                </el-row>
+                <el-row :gutter="10" v-else-if="parameterName == '014'">
+                  <el-col :span="12" :xs="24">
                     <el-row>
                       <el-col :span="12" :xs="24" class="panel-content-title"
                         >生产批次号 :{{ productionBatchCode }}</el-col
@@ -69,7 +119,6 @@
                 <el-button
                   type="primary"
                   style="margin: 5px"
-                  v-if="parameterName == '029'"
                   @click="get_ask_task()"
                 >
                   开始
@@ -99,6 +148,10 @@
           ></el-table-column>
           <el-table-column prop="Color" label="颜色"></el-table-column>
           <el-table-column prop="Specification" label="规格"></el-table-column>
+          <el-table-column
+            prop="Specification"
+            label="托盘编号"
+          ></el-table-column>
           <el-table-column
             prop="EntranceCode"
             label="上料口编号"
@@ -136,11 +189,19 @@
           ></el-pagination>
         </el-row>
       </el-row>
-      <el-row v-else>
+      <el-row v-else-if="parameterName == '021'">
         <el-table :data="tableData_021" border stripe style="width: 100%">
           <el-table-column
             prop="categoryType"
-            label="品类类型"
+            label="产线编号"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="托盘编号"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="物料描述"
           ></el-table-column>
           <el-table-column
             prop="doorLeafHeight"
@@ -158,36 +219,12 @@
             prop="doorLeafStyle"
             label="门扇款式"
           ></el-table-column>
-          <el-table-column prop="color" label="颜色"></el-table-column>
+          <el-table-column prop="color" label="物料数量"></el-table-column>
           <el-table-column
             prop="sequenceNumber"
-            label="部件顺序号"
-          ></el-table-column>
-          <el-table-column
-            prop="partSerialNumber"
-            label="部件唯一码"
+            label="已加工数量"
           ></el-table-column>
           <el-table-column prop="sequenceStatus" label="完成状态">
-            <template slot-scope="scope">
-              <span v-if="scope.row.sequenceStatus == 'UNPROCESSED'"
-                >未加工</span
-              >
-              <span v-else-if="scope.row.sequenceStatus == 'ONE_PROCESSING'"
-                >第一次加工中</span
-              >
-              <span v-else-if="scope.row.sequenceStatus == 'TWO_PROCESSING'"
-                >第二次加工中</span
-              >
-              <span v-else-if="scope.row.sequenceStatus == 'COMPLETE'"
-                >加工完成</span
-              >
-              <span v-else-if="scope.row.sequenceStatus == 'REJECTS'"
-                >不良品</span
-              >
-              <span v-else-if="scope.row.sequenceStatus == 'SCRAPPED'"
-                >报废</span
-              >
-            </template>
           </el-table-column>
         </el-table>
         <el-row>
@@ -199,6 +236,104 @@
             :page-size="pageSize_021"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total_021"
+          ></el-pagination>
+        </el-row>
+      </el-row>
+
+      <el-row v-else-if="parameterName == '011'">
+        <el-table :data="tableData_011" border stripe style="width: 100%">
+          <el-table-column
+            prop="categoryType"
+            label="物料序号"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="物料编码"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="物料描述"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="托盘编号"
+          ></el-table-column>
+          <el-table-column prop="doorLeafHeight" label="材质"></el-table-column>
+          <el-table-column prop="doorLeafWidth" label="颜色"></el-table-column>
+          <el-table-column
+            prop="doorLeafThickness"
+            label="规格"
+          ></el-table-column>
+          <el-table-column
+            prop="doorLeafStyle"
+            label="上料口编号"
+          ></el-table-column>
+          <el-table-column
+            prop="color"
+            label="投入物料的数量"
+          ></el-table-column>
+          <el-table-column
+            prop="sequenceNumber"
+            label="封边材料"
+          ></el-table-column>
+          <el-table-column prop="sequenceStatus" label="封边类型">
+          </el-table-column>
+          <el-table-column prop="sequenceStatus" label="开槽工艺">
+          </el-table-column>
+          <el-table-column prop="sequenceStatus" label="执行状态">
+          </el-table-column>
+        </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange_011"
+            @current-change="handleCurrentChange_011"
+            :current-page="currentPage_011"
+            :page-sizes="[10, 20, 30]"
+            :page-size="pageSize_011"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total_011"
+          ></el-pagination>
+        </el-row>
+      </el-row>
+
+      <el-row v-else-if="parameterName == '014'">
+        <el-table :data="tableData_011" border stripe style="width: 100%">
+          <el-table-column
+            prop="categoryType"
+            label="物料序号"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="物料编码"
+          ></el-table-column>
+          <el-table-column
+            prop="categoryType"
+            label="物料描述"
+          ></el-table-column>
+          <el-table-column prop="doorLeafHeight" label="材质"></el-table-column>
+          <el-table-column prop="doorLeafWidth" label="颜色"></el-table-column>
+          <el-table-column prop="Specification" label="规格"></el-table-column>
+          <el-table-column prop="Specification" label="温度"></el-table-column>
+          <el-table-column
+            prop="doorLeafStyle"
+            label="托盘编号"
+          ></el-table-column>
+          <el-table-column
+            prop="color"
+            label="投入物料的数量"
+          ></el-table-column>
+          <el-table-column prop="sequenceStatus" label="执行状态">
+          </el-table-column>
+        </el-table>
+        <el-row>
+          <el-pagination
+            @size-change="handleSizeChange_011"
+            @current-change="handleCurrentChange_011"
+            :current-page="currentPage_011"
+            :page-sizes="[10, 20, 30]"
+            :page-size="pageSize_011"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total_011"
           ></el-pagination>
         </el-row>
       </el-row>
@@ -240,6 +375,16 @@ export default {
       currentPage_021: 1,
       pageSize_021: 10,
       tableData_021: [],
+      total_011: 0,
+      currentPage_011: 1,
+      pageSize_011: 10,
+      tableData_011: [],
+
+      total_014: 0,
+      currentPage_014: 1,
+      pageSize_014: 10,
+      tableData_014: [],
+
       total_029: 0,
       currentPage_029: 1,
       pageSize_029: 10,
@@ -319,6 +464,24 @@ export default {
     },
     handleCurrentChange_021(val) {
       this.currentPage_021 = val
+      this.get_first_task()
+    },
+    handleSizeChange_011(val) {
+      this.pageSize_011 = val
+      this.currentPage_011 = 1
+      this.get_first_task()
+    },
+    handleCurrentChange_011(val) {
+      this.currentPage_011 = val
+      this.get_first_task()
+    },
+    handleSizeChange_014(val) {
+      this.pageSize_011 = val
+      this.currentPage_011 = 1
+      this.get_first_task()
+    },
+    handleCurrentChange_014(val) {
+      this.currentPage_011 = val
       this.get_first_task()
     },
     get_ask_task() {
