@@ -55,12 +55,16 @@
   </div>
 </template>
 <script>
+import { plc_parameter } from '@/common/plc_parameter'
 export default {
   //主页面
   name: 'manualControl',
   data() {
-    return {}
+    return {
+      bloc: plc_parameter,
+    }
   },
+  mounted() {},
 }
 </script>
 <style  lang="less" scoped>

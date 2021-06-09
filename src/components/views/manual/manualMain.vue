@@ -53,16 +53,16 @@
                     </el-row>
                     <el-row :gutter="40" style="padding-top: 50px">
                       <el-col :span="14">
-                        <el-form
-                          label-position="right"
-                          :model="form"
-                          label-width="auto"
-                        >
+                        <el-form label-position="right" label-width="auto">
                           <el-form-item label="X当前位置(mm)">
-                            <el-input v-model="form.XPosition"></el-input>
+                            <el-input
+                              v-model="bloc.getCurrent().D340"
+                            ></el-input>
                           </el-form-item>
                           <el-form-item label="Y当前位置(mm)">
-                            <el-input v-model="form.YPosition"></el-input>
+                            <el-input
+                              v-model="bloc.getCurrent().D344"
+                            ></el-input>
                           </el-form-item>
                         </el-form>
                       </el-col>
@@ -90,31 +90,27 @@
                 </el-row>
               </el-col>
               <el-col :span="6">
-                <el-form
-                  label-position="right"
-                  :model="form"
-                  label-width="auto"
-                >
+                <el-form label-position="right" label-width="auto">
                   <el-form-item label="运行速度%">
-                    <el-input v-model="form.speed"></el-input>
+                    <el-input v-model="bloc.getFunction().D372"></el-input>
                   </el-form-item>
                   <el-form-item label="板长(mm)">
-                    <el-input v-model="form.doorLeafHeight"></el-input>
+                    <el-input v-model="bloc.getFunction().D374"></el-input>
                   </el-form-item>
                   <el-form-item label="板宽(mm)">
-                    <el-input v-model="form.doorLeafWidth"></el-input>
+                    <el-input v-model="bloc.getFunction().D378"></el-input>
                   </el-form-item>
                   <el-form-item label="板厚(mm)">
-                    <el-input v-model="form.doorLeafThickness"></el-input>
+                    <el-input v-model="bloc.getFunction().D382"></el-input>
                   </el-form-item>
                   <el-form-item label="上板次数">
-                    <el-input v-model="form.quatity"></el-input>
+                    <el-input v-model="bloc.getFunction().D386"></el-input>
                   </el-form-item>
                   <el-form-item label="当前上板次数">
-                    <el-input v-model="form.nowQuatity"></el-input>
+                    <el-input v-model="bloc.getCurrent().D388"></el-input>
                   </el-form-item>
                   <el-form-item label="上板数量">
-                    <el-input v-model="form.num"></el-input>
+                    <el-input v-model="bloc.getCurrent().D390"></el-input>
                   </el-form-item>
                 </el-form>
               </el-col>
@@ -126,22 +122,13 @@
   </div>
 </template>
 <script>
+import { plc_parameter } from '@/common/plc_parameter'
 export default {
   //主页面
   name: 'manualMain',
   data() {
     return {
-      form: {
-        speed: '0',
-        doorLeafHeight: '0.0',
-        doorLeafWidth: '0.0',
-        doorLeafThickness: '0.0',
-        quatity: '0',
-        nowQuatity: '0',
-        num: '0',
-        XPosition: '0.00',
-        YPosition: '0.00',
-      },
+      bloc: plc_parameter,
     }
   },
 }

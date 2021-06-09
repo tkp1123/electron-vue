@@ -1,6 +1,5 @@
 .DS_Store
 node_modules/
-/dist/
 /wangli-win32-x64/
 .history/
 npm-debug.log*
